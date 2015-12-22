@@ -7,13 +7,7 @@ namespace ResourceLibrary
 {
     public class CustomResources
     {
-        public static ComponentResourceKey SadTileBrush
-        {
-            get
-            {
-                return new ComponentResourceKey(
-                    typeof(CustomResources), "SadTileBrush");
-            }
-        }
+        public static ComponentResourceKey SadTileBrush => new ComponentResourceKey(
+            typeof(CustomResources), "SadTileBrush");
     }
 }
