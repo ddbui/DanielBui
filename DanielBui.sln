@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wpf", "Wpf", "{89A4FC07-1F62-4A1E-A289-60B087D9B2CF}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,6 +27,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.0", "2.0", "{78A67356-47FF-497D-B42B-E4A44F5BB43D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewFeatureDemo", "CSharp\6.0\NewFeatureDemo\NewFeatureDemo.csproj", "{1CDB8D20-FC98-4A29-B899-D70A148F4731}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.5", "4.5", "{AAE7E0D0-7414-4023-9196-4450E5C23649}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskParallelLibraryDemo", "CSharp\4.5\TaskParallelLibraryDemo\TaskParallelLibraryDemo.csproj", "{2533E72B-0246-4E42-AC2C-635F896A6086}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +68,14 @@ Global
 		{1CDB8D20-FC98-4A29-B899-D70A148F4731}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1CDB8D20-FC98-4A29-B899-D70A148F4731}.Release|x86.ActiveCfg = Release|Any CPU
 		{1CDB8D20-FC98-4A29-B899-D70A148F4731}.Release|x86.Build.0 = Release|Any CPU
+		{2533E72B-0246-4E42-AC2C-635F896A6086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2533E72B-0246-4E42-AC2C-635F896A6086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2533E72B-0246-4E42-AC2C-635F896A6086}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2533E72B-0246-4E42-AC2C-635F896A6086}.Debug|x86.Build.0 = Debug|Any CPU
+		{2533E72B-0246-4E42-AC2C-635F896A6086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2533E72B-0246-4E42-AC2C-635F896A6086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2533E72B-0246-4E42-AC2C-635F896A6086}.Release|x86.ActiveCfg = Release|Any CPU
+		{2533E72B-0246-4E42-AC2C-635F896A6086}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,5 +90,7 @@ Global
 		{A060A077-BDF9-4C7B-9AB9-783726211608} = {5D433892-9A53-4C94-9A8D-74FD32DDE638}
 		{78A67356-47FF-497D-B42B-E4A44F5BB43D} = {5D433892-9A53-4C94-9A8D-74FD32DDE638}
 		{1CDB8D20-FC98-4A29-B899-D70A148F4731} = {58A010E1-9CCD-427D-B8F7-13907B7DDC2C}
+		{AAE7E0D0-7414-4023-9196-4450E5C23649} = {5D433892-9A53-4C94-9A8D-74FD32DDE638}
+		{2533E72B-0246-4E42-AC2C-635F896A6086} = {AAE7E0D0-7414-4023-9196-4450E5C23649}
 	EndGlobalSection
 EndGlobal
