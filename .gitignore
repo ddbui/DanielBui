@@ -52,3 +52,8 @@ Wpf/ResourcesDemo/bin/
 Wpf/ResourcesDemo/obj/
 Wpf/ResourceDictionaryDemo/obj/
 Wpf/ResourceDictionaryDemo/bin/
+Application/MissionPlanner/bin/
+Application/MissionPlanner/obj/Debug/App.g.i.cs
+Application/MissionPlanner/obj/
+CSharp/4.5/TaskParallelLibraryDemo/bin/
+CSharp/4.5/TaskParallelLibraryDemo/obj/

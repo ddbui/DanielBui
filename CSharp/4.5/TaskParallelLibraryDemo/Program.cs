@@ -10,17 +10,24 @@ namespace TaskParallelLibraryDemo
         {
             //CreateTask();
 
+            // Run without task
             TaskMethod2("Main Thread Task");
+
+            // This task will be placed on a thread pool
+            // Main thread waits and is blocked until the task returns
             Task<int> task = CreateTask("Task 1");
             task.Start();
             int result = task.Result;
             Console.WriteLine("Result is: {0}", result);
 
+            // This task will run on main thread because we use RunSynchronously
             task = CreateTask("Task 2");
             task.RunSynchronously();
             result = task.Result;
             Console.WriteLine("Result is: {0}", result);
 
+            // Same as Task 1 but we're not blocking the thread.
+            // We're just spinning until task is complete
             task = CreateTask("Task 3");
             task.Start();
             while (!task.IsCompleted)
