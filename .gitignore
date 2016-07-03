@@ -57,3 +57,8 @@ Application/MissionPlanner/obj/Debug/App.g.i.cs
 Application/MissionPlanner/obj/
 CSharp/4.5/TaskParallelLibraryDemo/bin/
 CSharp/4.5/TaskParallelLibraryDemo/obj/
+Application/MissionPlanner/code/MissionPlanner.Infrastructure/obj/
+Application/MissionPlanner/code/MissionPlanner.Logging/obj/
+Application/MissionPlanner/code/MissionPlanner.UI/obj/
+Application/MissionPlanner/code/MissionPlanner.UI/bin/
+Application/MissionPlanner/code/MissionPlanner.Logging/bin/
