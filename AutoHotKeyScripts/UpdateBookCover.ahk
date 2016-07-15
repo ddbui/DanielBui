@@ -18,15 +18,28 @@ if ErrorLevel
 }
 else
 {
+    ; Need to find a better way than having the two sleeps in here!!!!
+    
     Sleep, 1000 ;Temp: Give PDFXCViewer some times to completely open the file
     Send, ^{Home}    
     Sleep, 1000 ;Temp: Give PDFXCViewer some times to completely open the file    
 }
 
 WinGetActiveStats, Title, Width, Height, X, Y
+
+;TODO: If this is a secured PDF, simply return
+If InStr(Title, "[SECURED]")
+{
+    MsgBox, The PDF file is secured.
+    return
+}
+    
 MouseClick, right, Width/2, Height/2 ;Right-click on the first page of the PDF. Dead center.
-Send, {Down 8}{Enter}{Enter}
-;Sleep, 1000
+
+; This is not 100% OK since menu items can be disabled and skipped over, especially when
+; dealing with an secured PDF.
+Send, {Down 8}{Enter}{Enter} 
+
 WinWaitActive, Export To Image, ,60
 if ErrorLevel
 {
@@ -36,10 +49,8 @@ if ErrorLevel
 else
 {
     Send, {Enter} ;Select "Export..." button on "Export to Image" dialog box
-    ;Sleep, 2000
 }
 
-;Sleep, 3000 ;TODO: We need to wait for the dialog above to go away!
 WinWaitActive, Confirm File Replace, ,5
 if ErrorLevel
 {
@@ -61,12 +72,27 @@ IfWinExist, ahk_class DSUI:PDFXCViewer
 
 MouseClick, right,xpos, ypos
 Send, {Down 2}{Enter}{Enter}
-Sleep, 1000 ;TODO: Wait for the dialog to pop up
-Send, !b ;Click the "Browse" button. 'b' has to be lowercase.
-Sleep, 1000
-Send, cv.png
-Send, {Enter}
-Send, {Enter}
 
-return
+WinWaitActive, Edit Metadata, , 20
+if ErrorLevel
+{
+    MsgBox, WinWaitActive Edit Metadata timed out.    
+}
+else
+{
+    Send, !b ;Click the "Browse" button. 'b' has to be lowercase.
+    ;Sleep, 1000
+    
+    WinWaitActive, Choose cover for, , 20
+    if ErrorLevel
+    {
+        MsgBox, WinWaitActive Choose cover for timed out.    
+        return
+    }
+
+    Send, cv.png
+    Send, {Enter}
+    Send, {Enter}
+}
+
 ;End Book Cover Updater
