@@ -7,6 +7,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;It only works for PDF file at the moment
 
 #space::
+
+;Save the position where the cover is. 
 MouseGetPos, xpos, ypos
 Send v ;This will open PDF-XChange Viewer
 
@@ -25,22 +27,9 @@ else
     Sleep, 1000 ;Temp: Give PDFXCViewer some times to completely open the file    
 }
 
-WinGetActiveStats, Title, Width, Height, X, Y
+Send, !F{R}{Enter} ;Open Export To Image dialog box
 
-;TODO: If this is a secured PDF, simply return
-If InStr(Title, "[SECURED]")
-{
-    MsgBox, The PDF file is secured.
-    return
-}
-    
-MouseClick, right, Width/2, Height/2 ;Right-click on the first page of the PDF. Dead center.
-
-; This is not 100% OK since menu items can be disabled and skipped over, especially when
-; dealing with an secured PDF.
-Send, {Down 8}{Enter}{Enter} 
-
-WinWaitActive, Export To Image, ,60
+WinWaitActive, Export To Image, ,10
 if ErrorLevel
 {
     MsgBox, WinWait Export To Image timed out.
