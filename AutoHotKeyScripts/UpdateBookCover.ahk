@@ -33,7 +33,8 @@ WinWaitActive, Export To Image, ,10
 if ErrorLevel
 {
     MsgBox, WinWait Export To Image timed out.
-    return
+    ;Try to open it again
+    Send, !F{R}{Enter}
 }
 
 ;Select "Export..." button on "Export to Image" dialog box. We probably can explicitly select the "Export" button using ControlClick
