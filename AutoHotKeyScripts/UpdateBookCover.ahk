@@ -66,6 +66,7 @@ WinWaitActive, Edit Metadata, , 20
 if ErrorLevel
 {
     MsgBox, WinWaitActive Edit Metadata timed out.
+    return
 }
 Send, !b ;Click the "Browse" button. 'b' has to be lowercase.
 
