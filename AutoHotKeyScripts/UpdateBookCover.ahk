@@ -8,48 +8,48 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 #space::
 
-;Save the position where the cover is. 
-MouseGetPos, xpos, ypos
+;Open the selected file. 'v' stands for View.
 Send v ;This will open PDF-XChange Viewer
 
+;Wait for the file to be opened under PDF-XChange
 WinWaitActive, ahk_class DSUI:PDFXCViewer, , 60
 if ErrorLevel
 {
     MsgBox, WinWait PDFXCViewer timed out.
     return
 }
-else
-{
-    ; Need to find a better way than having the two sleeps in here!!!!
-    
-    Sleep, 1000 ;Temp: Give PDFXCViewer some times to completely open the file
-    Send, ^{Home}    
-    Sleep, 1000 ;Temp: Give PDFXCViewer some times to completely open the file    
-}
 
-Send, !F{R}{Enter} ;Open Export To Image dialog box
+;Select Ctrl-Home to go to the first page of the book
+;NEED TO FIND A BETTER WAY THAN HAVING THE TWO SLEEPS IN HERE!!!!
+Sleep, 1000 ;Temp: Give PDFXCViewer some times to completely open the file
+Send, ^{Home}    
+Sleep, 1000 ;Temp: Give PDFXCViewer some times to completely open the file
 
+;Open Export To Image dialog box
+Send, !F{R}{Enter} 
+
+;Wait for that dialog to open
 WinWaitActive, Export To Image, ,10
 if ErrorLevel
 {
     MsgBox, WinWait Export To Image timed out.
     return
 }
-else
-{
-    Send, {Enter} ;Select "Export..." button on "Export to Image" dialog box
-}
 
+;Select "Export..." button on "Export to Image" dialog box. We probably can explicitly select the "Export" button using ControlClick
+Send, {Enter} 
+
+;For now, we assume that there's a file with a same name. That's why we expect this dialog to pop up.
+;WHAT IF THERE IS NOT A FILE WITH THE SAME NAME?
 WinWaitActive, Confirm File Replace, ,5
 if ErrorLevel
 {
     MsgBox, WinWait timed out.
     return
 }
-else
-{
-    Send, {Enter} ; We should be done extracting the cover at this point!    
-}  
+
+;Click "Yes" button. AGAIN, WE MIGHT WANT TO EXPLICITLY CLICK THE "YES" BUTTON!!!
+Send, {Enter} 
 
 WinWaitClose, Exporting to Image..., , 10
 
@@ -59,29 +59,39 @@ IfWinExist, ahk_class DSUI:PDFXCViewer
     WinClose
 }
 
-MouseClick, right,xpos, ypos
-Send, {Down 2}{Enter}{Enter}
+;Open "Edit Metadata" dialog box
+Send, e
 
 WinWaitActive, Edit Metadata, , 20
 if ErrorLevel
 {
-    MsgBox, WinWaitActive Edit Metadata timed out.    
+    MsgBox, WinWaitActive Edit Metadata timed out.
 }
-else
-{
-    Send, !b ;Click the "Browse" button. 'b' has to be lowercase.
-    ;Sleep, 1000
-    
-    WinWaitActive, Choose cover for, , 20
-    if ErrorLevel
-    {
-        MsgBox, WinWaitActive Choose cover for timed out.    
-        return
-    }
+Send, !b ;Click the "Browse" button. 'b' has to be lowercase.
 
-    Send, cv.png
-    Send, {Enter}
-    Send, {Enter}
+WinWaitActive, Choose cover for, , 20
+if ErrorLevel
+{
+	MsgBox, WinWaitActive Choose cover for timed out.    
+	return
 }
+
+Send, cv.png
+Send, {Enter}
+Send, {Enter}
 
 ;End Book Cover Updater
+
+;Trim Cover Automatically
+#F12::
+
+;Open "Edit Metadata" dialog box
+Send, e
+
+WinWaitActive, Edit Metadata, , 20
+if ErrorLevel
+{
+    MsgBox, WinWaitActive Edit Metadata timed out.
+	return
+}
+return
