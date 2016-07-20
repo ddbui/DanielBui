@@ -6,6 +6,14 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;This script is used for updating book cover in Calibre
 ;It only works for PDF file at the moment
 
+ClosePdfXchangeViewer()
+{
+    IfWinExist, ahk_class DSUI:PDFXCViewer
+    {
+        WinClose
+    }
+}
+
 #space::
 
 ;Open the selected file. 'v' stands for View.
@@ -25,16 +33,32 @@ Sleep, 1000 ;Temp: Give PDFXCViewer some times to completely open the file
 Send, ^{Home}    
 Sleep, 1000 ;Temp: Give PDFXCViewer some times to completely open the file
 
-;Open Export To Image dialog box
-Send, !F{R}{Enter} 
+count = 3
 
-;Wait for that dialog to open
-WinWaitActive, Export To Image, ,10
-if ErrorLevel
+while count > 0
 {
-    MsgBox, WinWait Export To Image timed out.
-    ;Try to open it again
-    Send, !F{R}{Enter}
+    ;Open Export To Image dialog box
+    Send, !F{R}{Enter} 
+
+    ;Wait for that dialog to open
+    WinWaitActive, Export To Image, ,10
+    if ErrorLevel
+    {
+        ;MsgBox, WinWait Export To Image timed out.
+        Sleep, 1000
+       
+        ; Too many error, give up
+        if count = 1
+        {
+            ClosePdfXchangeViewer()
+            return
+        }
+        
+        count = count - 1
+        continue
+    }
+    else
+        count = 0
 }
 
 ;Select "Export..." button on "Export to Image" dialog box. We probably can explicitly select the "Export" button using ControlClick
@@ -54,11 +78,7 @@ Send, {Enter}
 
 WinWaitClose, Exporting to Image..., , 10
 
-; Close PDF-XChange Viewercv.png
-IfWinExist, ahk_class DSUI:PDFXCViewer
-{
-    WinClose
-}
+ClosePdfXchangeViewer()
 
 ;Open "Edit Metadata" dialog box
 Send, e
