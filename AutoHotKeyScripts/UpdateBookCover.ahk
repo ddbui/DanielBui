@@ -14,6 +14,18 @@ ClosePdfXchangeViewer()
     }
 }
 
+CloseCalibreEbookViewer()
+{
+	;ahk_exe calibre-parallel.exe
+    IfWinExist, ahk_exe calibre-parallel.exe
+    {
+        WinClose
+    }
+}
+
+;-------------------------------------------------------------------------------------------
+; WINDOWS-SPACE - UPDATE COVER FOR PDF
+;-------------------------------------------------------------------------------------------
 #space::
 
 ;Open the selected file. 'v' stands for View.
@@ -44,7 +56,7 @@ while count > 0
     WinWaitActive, Export To Image, ,10
     if ErrorLevel
     {
-        ;MsgBox, WinWait Export To Image timed out.
+        MsgBox, WinWait Export To Image timed out.
         Sleep, 1000
        
         ; Too many error, give up
@@ -116,4 +128,65 @@ if ErrorLevel
     MsgBox, WinWaitActive Edit Metadata timed out.
 	return
 }
+return
+
+;-------------------------------------------------------------------------------------------
+; WINDOWS-1 - UPDATE COVER FOR EPUB
+;-------------------------------------------------------------------------------------------
+#1::
+OutputDebug, [ahk]: UPDATE COVER FOR EPUB
+
+;Open the selected file. 'v' stands for View.
+Send v ;This will open Calibre e-book viewer
+
+;Wait for the file to be opened under PDF-XChange
+WinWait, ahk_exe calibre-parallel.exe, , 60
+if ErrorLevel
+{
+    MsgBox, WinWait Calibre Viewer timed out.
+    return
+}
+
+;Once the viewer shows up, we need to figure out where the cover, a .jpeg file, is.
+;Most likely it will be in here "C:\Users\buidan\AppData\Local\Temp\calibre_*" 
+
+Loop, Files, C:\Users\buidan\AppData\Local\Temp\*.jpeg, R
+{
+	OutputDebug, [ahk]: %A_LoopFileName% - %A_LoopFileFullPath%
+	name = %A_LoopFileFullPath%
+	if InStr(name, "cover")
+	{
+		OutputDebug, [ahk]: Found cover
+	}
+	else
+	{
+		OutputDebug, [ahk]: No cover
+		return
+	}
+}
+
+;Open "Edit Metadata" dialog box
+Send, e
+
+WinWaitActive, Edit Metadata, , 20
+if ErrorLevel
+{
+    MsgBox, WinWaitActive Edit Metadata timed out.
+    return
+}
+Send, !b ;Click the "Browse" button. 'b' has to be lowercase.
+
+WinWaitActive, Choose cover for, , 20
+if ErrorLevel
+{
+	MsgBox, WinWaitActive Choose cover for timed out.    
+	return
+}
+
+Send, %name%
+Send, {Enter}
+Send, {Enter}
+
+;CloseCalibreEbookViewer()
+
 return
