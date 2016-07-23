@@ -136,6 +136,9 @@ return
 #1::
 OutputDebug, [ahk]: UPDATE COVER FOR EPUB
 
+CloseCalibreEbookViewer()
+Sleep, 100
+
 ;Open the selected file. 'v' stands for View.
 Send v ;This will open Calibre e-book viewer
 
@@ -146,25 +149,41 @@ if ErrorLevel
     MsgBox, WinWait Calibre Viewer timed out.
     return
 }
+else
+{
+    OutputDebug, [ahk]: Calibre Viewer opened!
+    WinMinimize
+}
+
+Sleep, 1000
 
 ;Once the viewer shows up, we need to figure out where the cover, a .jpeg file, is.
 ;Most likely it will be in here "C:\Users\buidan\AppData\Local\Temp\calibre_*" 
 
-Loop, Files, C:\Users\buidan\AppData\Local\Temp\*.jpeg, R
+found := false
+
+; Loop through all the files, and look for *cover*.jpg or *cover*.jpeg
+; Look like using regex might be a good idea here.
+Loop, Files, C:\Users\Daniel\AppData\Local\Temp\*.*, R
 {
-	OutputDebug, [ahk]: %A_LoopFileName% - %A_LoopFileFullPath%
 	name = %A_LoopFileFullPath%
-	if InStr(name, "cover")
+    extension = %A_LoopFileExt%  
+        
+	if InStr(name, "cover") and (extension = "jpg" or extension = "jpeg")
 	{
-		OutputDebug, [ahk]: Found cover
-	}
-	else
-	{
-		OutputDebug, [ahk]: No cover
-		return
+		OutputDebug, [ahk]: Found cover, %name% - %extension%
+        found := true
+        Break
 	}
 }
 
+if (found = false)
+{
+    OutputDebug, [ahk]: No cover found
+    return
+}
+    
+    
 ;Open "Edit Metadata" dialog box
 Send, e
 
