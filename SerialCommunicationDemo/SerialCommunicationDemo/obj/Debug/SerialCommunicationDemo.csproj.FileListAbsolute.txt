@@ -1,1 +1,0 @@
-C:\Users\buidan\Documents\Projects\GitHub\SerialCommunicationDemo\SerialCommunicationDemo\bin\Debug\SerialCommunicationDemo.exe.config
