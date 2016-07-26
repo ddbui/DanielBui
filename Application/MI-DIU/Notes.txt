@@ -1,0 +1,6 @@
+For this project, we will utilize:
+1) Prism 6.0
+2) MahApps.Metro toolkit
+3) log4net for logging
+
+07/26/16: Referenced PRISM 6 from MiDiu.UI

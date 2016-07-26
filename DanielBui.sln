@@ -52,7 +52,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonDemo", "JSON\JsonDemo\J
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MI-DIU", "MI-DIU", "{D20E03BC-C4AC-4DC4-8A10-016984A7DCD2}"
 	ProjectSection(SolutionItems) = preProject
-		Notes.txt = Notes.txt
+		Application\MI-DIU\Notes.txt = Application\MI-DIU\Notes.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiDiu.UI", "Application\MI-DIU\MiDiu.UI\MiDiu.UI.csproj", "{6E025058-7F58-4A98-B1E1-8933DFA715B4}"
