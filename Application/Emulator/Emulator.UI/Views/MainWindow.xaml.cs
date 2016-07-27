@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MiDiu.UI.Views
+namespace Emulator.UI.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

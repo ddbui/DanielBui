@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MiDiu.UI.Properties
+namespace Emulator.UI.Properties
 {
 
 

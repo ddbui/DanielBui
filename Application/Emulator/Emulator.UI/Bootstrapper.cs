@@ -1,11 +1,11 @@
-﻿using MiDiu.UI.Views;
+﻿using Microsoft.Practices.Unity;
 using Prism.Unity;
-using Microsoft.Practices.Unity;
+using Emulator.UI.Views;
 using System.Windows;
 
-namespace MiDiu.UI
+namespace Emulator.UI
 {
-    public class Bootstrapper : UnityBootstrapper
+    class Bootstrapper : UnityBootstrapper
     {
         protected override DependencyObject CreateShell()
         {
@@ -16,12 +16,5 @@ namespace MiDiu.UI
         {
             Application.Current.MainWindow.Show();
         }
-
-        protected override void ConfigureModuleCatalog()
-        {
-            base.ConfigureModuleCatalog();
-        }
-
-
     }
 }
