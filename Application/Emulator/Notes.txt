@@ -3,4 +3,8 @@ For this project, we will utilize:
 2) MahApps.Metro toolkit
 3) log4net for logging
 
-07/26/16: Referenced PRISM 6 from MiDiu.UI
+07/26/16: This project was created using the Prism Unity App template.
+
+07/27/16: Added Emulator.Logging which utilized log4net.
+
+07/28/16: Check this idea for logging out. Pretty interesting! http://pradeepmahdevu.blogspot.com/2009/04/composite-architecture-library-prism.html

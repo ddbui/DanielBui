@@ -53,6 +53,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emulator.UI", "Application\Emulator\Emulator.UI\Emulator.UI.csproj", "{99C9E82C-C594-446D-AA59-8FFBC43AD226}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Emulator", "Emulator", "{1498C490-BD68-4D9D-93FD-A7DAD501F869}"
+	ProjectSection(SolutionItems) = preProject
+		Application\Emulator\Notes.txt = Application\Emulator\Notes.txt
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emulator.Logging", "Application\Emulator\Emulator.Logging\Emulator.Logging.csproj", "{66A5B199-5330-411A-8496-DBF7782D52F8}"
 EndProject
