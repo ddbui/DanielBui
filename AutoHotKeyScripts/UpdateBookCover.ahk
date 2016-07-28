@@ -110,7 +110,7 @@ if ErrorLevel
 	return
 }
 
-Send, cv.png
+Send, F:\CALIBRE\cv.png
 Send, {Enter}
 Send, {Enter}
 
@@ -165,7 +165,8 @@ Sleep, 2000
 
 ;Once the viewer shows up, we need to figure out where the cover, a .jpeg file, is.
 ;Most likely it will be in here "C:\Users\buidan\AppData\Local\Temp\calibre_*" 
-
+;At home, use C:\Users\Daniel\AppData\Local\Temp\
+;At work, use C:\Users\buidan\AppData\Local\Temp\
 found = 0
 max_size = 0
 biggest_image_file =
@@ -174,7 +175,7 @@ list := [jpg, jpeg]
 
 ; Loop through all the files, and look for *cover*.jpg or *cover*.jpeg
 ; Look like using regex might be a good idea here.
-Loop, Files, C:\Users\Daniel\AppData\Local\Temp\*.*, R
+Loop, Files, C:\Users\buidan\AppData\Local\Temp\*.*, R
 {
     name = %A_LoopFileFullPath%
     extension = %A_LoopFileExt%  
