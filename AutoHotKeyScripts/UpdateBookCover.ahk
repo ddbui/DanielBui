@@ -134,7 +134,16 @@ return
 ; WINDOWS-1 - UPDATE COVER FOR EPUB
 ;-------------------------------------------------------------------------------------------
 #1::
+CloseCalibreEbookViewer()
+
+;Clear DebugView, ahk_class dbgviewClass
+WinActivate, ahk_class dbgviewClass
+SendInput, ^x ;!e
+WinMinimize, ahk_class dbgviewClass
+
 OutputDebug, [ahk]: UPDATE COVER FOR EPUB
+
+Sleep, 100
 
 ;Open the selected file. 'v' stands for View.
 Send v ;This will open Calibre e-book viewer
@@ -146,26 +155,75 @@ if ErrorLevel
     MsgBox, WinWait Calibre Viewer timed out.
     return
 }
+else
+{
+    OutputDebug, [ahk]: Calibre Viewer opened!
+    WinMinimize
+}
+
+Sleep, 2000
 
 ;Once the viewer shows up, we need to figure out where the cover, a .jpeg file, is.
 ;Most likely it will be in here "C:\Users\buidan\AppData\Local\Temp\calibre_*" 
 
-Loop, Files, C:\Users\buidan\AppData\Local\Temp\*.jpeg, R
+found = 0
+max_size = 0
+biggest_image_file =
+cover =
+list := [jpg, jpeg]
+
+; Loop through all the files, and look for *cover*.jpg or *cover*.jpeg
+; Look like using regex might be a good idea here.
+Loop, Files, C:\Users\Daniel\AppData\Local\Temp\*.*, R
 {
-	OutputDebug, [ahk]: %A_LoopFileName% - %A_LoopFileFullPath%
-	name = %A_LoopFileFullPath%
-	if InStr(name, "cover")
-	{
-		OutputDebug, [ahk]: Found cover
-	}
-	else
-	{
-		OutputDebug, [ahk]: No cover
-		return
-	}
+    name = %A_LoopFileFullPath%
+    extension = %A_LoopFileExt%  
+    size = %A_LoopFileSize%       
+    
+    if InStr(A_LoopFileFullPath, "calibre") AND (extension = "opf" OR extension = "html")
+    {
+        ; A better idea might be look for *cover*.html
+        OutputDebug, [ahk]: %name%                
+    }
+    
+    if InStr(A_LoopFileFullPath, "calibre") AND (extension = "jpg" OR extension = "jpeg" OR extension = "png")
+    {            
+        OutputDebug, [ahk]: %name%        
+        
+        if (InStr(name, "cover") OR InStr(name, "cvi")) AND !InStr(name, "back")
+        {
+            OutputDebug, [ahk]: Found cover, %name% - %extension%
+            cover = %name%
+            found := 1
+            Break
+        }
+        
+        if (size > max_size)
+        {
+            max_size = %size%
+            biggest_image_file = %name%
+        }
+    }  
 }
 
+if (!found)
+{
+    OutputDebug, [ahk]: Gotta go in here, man!
+    
+    if (biggest_image_file != "")
+    {
+        OutputDebug, [ahk]: No cover found, use %biggest_image_file%, %max_size%
+        cover = %biggest_image_file%
+    }
+    else
+    {
+        OutputDebug, [ahk]: No cover found, %biggest_image_file%, %max_size%
+        return
+    }    
+}
+    
 ;Open "Edit Metadata" dialog box
+OutputDebug, [ahk]: Open "Edit Metadata" dialog box
 Send, e
 
 WinWaitActive, Edit Metadata, , 20
@@ -183,10 +241,38 @@ if ErrorLevel
 	return
 }
 
-Send, %name%
+Send, %cover%
 Send, {Enter}
 Send, {Enter}
 
 ;CloseCalibreEbookViewer()
 
+return
+
+#9::
+Loop, Files, C:\Users\Daniel\AppData\Local\Temp\*.*, R
+{
+    name = %A_LoopFileFullPath%
+    extension = %A_LoopFileExt%  
+    size = %A_LoopFileSize%       
+    
+    if InStr(A_LoopFileFullPath, "calibre") AND (extension = "jpg")
+    {            
+        OutputDebug, [ahk]: %name%
+        
+        if InStr(name, "cover")
+        {
+            OutputDebug, [ahk]: Found cover, %name% - %extension%
+            cover = %name%
+            found := 1
+            Break
+        }
+        
+        if (size > max_size)
+        {
+            max_size = %size%
+            biggest_image_file = %name%
+        }
+    }  
+}
 return
