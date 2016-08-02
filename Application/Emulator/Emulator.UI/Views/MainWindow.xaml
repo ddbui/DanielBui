@@ -41,17 +41,17 @@
                         Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3" />
         
         <!--Buttons-->
-        <Button Grid.Row="2" Grid.Column="0">Previous</Button>
-        <Button Grid.Row="3" Grid.Column="0">Next</Button>
-        
-        <Button Grid.Row="2" Grid.Column="4">Previous</Button>
-        <Button Grid.Row="3" Grid.Column="4">Next</Button>
-        
-        <Button Grid.Row="4" Grid.Column="1">Menu</Button>
-        <Button Grid.Row="4" Grid.Column="3">Select</Button>
-        
-        <Button Grid.Row="5" Grid.Column="2">Current Activity</Button>
-        
+        <Button Content="Previous" x:Name="selectPreviousDisplayButton" Grid.Row="2" Grid.Column="0" />
+        <Button Content="Next" x:Name="selectNextDisplayButton" Grid.Row="3" Grid.Column="0" />
+
+        <Button Content="Previous" x:Name="selectPreviousChannelButton" Grid.Row="2" Grid.Column="4" />
+        <Button Content="Next" x:Name="selectNextChannelButton" Grid.Row="3" Grid.Column="4" />
+
+        <Button Content="Menu" x:Name="menuButton" Grid.Row="4" Grid.Column="1" />
+        <Button Content="Select" x:Name="selectButton" Grid.Row="4" Grid.Column="3" />
+
+        <Button Content="Current Activity" x:Name="currentActivityButton" Grid.Row="5" Grid.Column="2" />
+
     </Grid>
     
 </Controls:MetroWindow>

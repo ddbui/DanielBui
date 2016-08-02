@@ -2,9 +2,13 @@
 
 namespace Emulator.UI.ViewModels
 {
+    /// <summary>
+    /// MainWindowViewModel, view model for main window.
+    /// BindableBase is something I've never seen before!
+    /// </summary>
     public class MainWindowViewModel : BindableBase
     {
-        private string _title = "Emulator Application";
+        private string _title = "Emulator";
         public string Title
         {
             get { return _title; }
