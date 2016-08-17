@@ -1,15 +1,15 @@
+07/29/16: Need to create some kind of custom control for Up/Down/Left/Right buttons.
+
+07/28/16: Check this idea for logging out. Pretty interesting! http://pradeepmahdevu.blogspot.com/2009/04/composite-architecture-library-prism.html
+
+07/27/16: Added Emulator.Logging which utilized log4net.
+
+07/26/16: This project was created using the Prism Unity App template.
+
 For this project, we will utilize:
 1) Prism 6.0
 2) MahApps.Metro toolkit. And don't forget about WPF toolkit either.
 3) log4net for logging
-
-07/26/16: This project was created using the Prism Unity App template.
-
-07/27/16: Added Emulator.Logging which utilized log4net.
-
-07/28/16: Check this idea for logging out. Pretty interesting! http://pradeepmahdevu.blogspot.com/2009/04/composite-architecture-library-prism.html
-
-07/29/16: Need to create some kind of custom control for Up/Down/Left/Right buttons.
 
 Some Useful Links
 http://mahapps.com/
