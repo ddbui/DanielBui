@@ -70,4 +70,16 @@ Application/Emulator/Emulator.UI/obj
 Application/Emulator/Emulator.UI/bin
 Application/Emulator/Emulator.Logging/obj
 Application/Emulator/Emulator.Logging/bin
+Demo/DataStructures/DataStructuresDemo.DataStructures/bin
+Demo/DataStructures/DataStructuresDemo.DataStructures/obj
+Demo/DataStructures/DataStructuresDemo.UnitTests/bin
+Demo/DataStructures/DataStructuresDemo.UnitTests/obj
+Demo/DesignPatterns/DesignPatternsDemo.Singleton/bin
+Demo/DesignPatterns/DesignPatternsDemo.Singleton/obj
+Demo/ParallelProgramming/bin
+Demo/ParallelProgramming/obj
+Demo/ParallelProgramming/_ReSharper.ParallelProgrammingDemo
+Demo/StaticConstructor
+*.suo
+*.db
 .vs
