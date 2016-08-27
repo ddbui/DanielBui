@@ -1,4 +1,5 @@
 ﻿using log4net;
+using log4net.Config;
 using Prism.Logging;
 using System;
 
@@ -10,6 +11,11 @@ namespace Emulator.Logging
     public class Log4NetLogger : ILoggerFacade
     {
         private readonly ILog logger = LogManager.GetLogger(typeof(Log4NetLogger));
+
+        public Log4NetLogger()
+        {
+            XmlConfigurator.Configure();
+        }
 
         public void Log(string message, Category category, Priority priority)
         {
