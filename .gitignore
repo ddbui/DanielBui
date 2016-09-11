@@ -80,6 +80,12 @@ Demo/ParallelProgramming/bin
 Demo/ParallelProgramming/obj
 Demo/ParallelProgramming/_ReSharper.ParallelProgrammingDemo
 Demo/StaticConstructor
+Database/DatabaseDemo/bin
+Database/DatabaseDemo/obj
+
+#Just for now, turn it back on later
+Application/LesFlorist
+LesFlorist.Tests
 *.suo
 *.db
 .vs
