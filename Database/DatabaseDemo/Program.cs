@@ -110,14 +110,19 @@ namespace DatabaseDemo
 
                 };
 
-                Console.WriteLine("--------------------------------------------------------------------------------------------------------------------");
-                Console.WriteLine("          Channel          |     Good Flights     |     Bad Flights     |         Diff         |      Absolute      ");
-                Console.WriteLine("--------------------------------------------------------------------------------------------------------------------");
+                Console.WriteLine("----------------------------------------------------------------------------------------------------------------------");
+                Console.WriteLine("          Channel          |     Good Flight      |     Bad Flight      |         Diff         |       Absolute       ");
+                Console.WriteLine("----------------------------------------------------------------------------------------------------------------------");
 
                 int line = 0;
                 foreach (var item in list)
                 {
-                    Console.WriteLine("{0, -27} {1, 22} {2, 21} {3, 22}", item.Name, item.Good, item.Bad, item.Diff);
+                    double? abs = null;
+                    if (item.Diff != null)
+                    {
+                        abs = Math.Abs((double) item.Diff);
+                    }
+                    Console.WriteLine("{0, -27} {1, 22} {2, 21} {3, 22} {4, 22}", item.Name, item.Good, item.Bad, item.Diff, abs);
                     line++;
                     if (line == 10)
                     {
