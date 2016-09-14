@@ -14,10 +14,12 @@ namespace WindowsFormsClientApplication
 {
     public partial class MainWindow : Form
     {
-        private List<Item> _dataList;
+        private List<Item> _dataList = new List<Item>();
+        private List<string> _columns = new List<string>();
+
         private List<View_RawNoRegime_Good> _goodList;
         private List<View_RawNoRegime_Bad> _badList;
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -30,7 +32,7 @@ namespace WindowsFormsClientApplication
             GetAverage(_goodList.AsQueryable(), "µ_Airspeed_hold_on");
             GetAverage(_badList.AsQueryable(), "µ_Airspeed_hold_on");
 
-            //GetAllColumnNames();
+            GetAllColumnNames();
 
             BuildDataList();
             Debug.WriteLine("There are {0} items on the list", _dataList.Count);
@@ -54,21 +56,11 @@ namespace WindowsFormsClientApplication
 
         private void GetAllColumnNames()
         {
+            if (_goodList.Count <= 0) return;
+
             foreach (PropertyInfo pi in _goodList[0].GetType().GetProperties())
             {
-                try
-                {
-                    Debug.WriteLine(pi.Name);
-
-                    // TODO: Use some kind of dynamic LINQ (or Expression Tree) to calculate the average
-                    // for the columns.
-                    var average = _goodList.Average(item => item.µ_Airspeed_hold_on);
-
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                }
+                _columns.Add(pi.Name);
             }
         }
 
@@ -96,6 +88,22 @@ namespace WindowsFormsClientApplication
         /// </summary>
         private void BuildDataList()
         {
+            if (_columns.Count <= 0) return;
+
+            foreach (var column in _columns)
+            {
+                // TODO: Find a better to exclude columns that we're not going to calculate an average for.
+                if (column == "Index" || column == "TAIL" || column == "Flight" || column == "Seq_" ||
+                    column == "Version" || column == "FltHrs" || column == "FltDate" || column == "FREQ" ||
+                    column == "min_System_Amp__A_" || column == "max_System_Amp__A_" || column == "µ_System_Amp__A_" || column == "s_System_Amp__A_")
+                    continue;
+
+                var item = new Item(column, GetAverage(_goodList.AsQueryable(), column), GetAverage(_badList.AsQueryable(), column));
+                _dataList.Add(item);
+            }
+
+            return;
+
             _dataList = new List<Item>
             {
                 new Item("µ_Airspeed_hold_on",                _goodList.Average(item => item.µ_Airspeed_hold_on),                _badList.Average(item => item.µ_Airspeed_hold_on)),
