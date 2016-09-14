@@ -6,21 +6,20 @@ using System.Collections.Generic;
 using FlightDataModel;
 using SharedLibrary;
 using System.Reflection;
-using System.Linq.Dynamic;
 using System.Linq.Expressions;
 
 namespace WindowsFormsClientApplication
 {
     public partial class MainWindow : Form
     {
-        private List<Item> _dataList = new List<Item>();
-        private List<string> _columns = new List<string>();
+        private readonly List<Item> _dataList = new List<Item>();
+        private readonly List<string> _columns = new List<string>();
 
         private List<View_RawNoRegime_Good> _goodList;
         private List<View_RawNoRegime_Bad> _badList;
 
-        private View_RawNoRegime_Good _goodChannelAverage = new View_RawNoRegime_Good();
-        private View_RawNoRegime_Bad _badChannelAverage = new View_RawNoRegime_Bad();
+        private readonly View_RawNoRegime_Good _goodChannelAverage = new View_RawNoRegime_Good();
+        private readonly View_RawNoRegime_Bad _badChannelAverage = new View_RawNoRegime_Bad();
         
         public MainWindow()
         {
@@ -42,13 +41,10 @@ namespace WindowsFormsClientApplication
 
         private void GetDataFromDatabase()
         {
-            using (FlightDataEntities db = new FlightDataEntities())
+            using (var db = new FlightDataEntities())
             {
                 _goodList = db.View_RawNoRegime_Good.ToList();
-                _badList = db.View_RawNoRegime_Bad.ToList();
-
-                Debug.WriteLine("There are {0} good items", _goodList.Count());
-                Debug.WriteLine("There are {0} bad items", _badList.Count());
+                _badList  = db.View_RawNoRegime_Bad.ToList();
             }
         }
 
@@ -56,7 +52,7 @@ namespace WindowsFormsClientApplication
         {
             if (_goodList.Count <= 0) return;
 
-            foreach (PropertyInfo pi in _goodList[0].GetType().GetProperties())
+            foreach (var pi in _goodList[0].GetType().GetProperties())
             {
                 _columns.Add(pi.Name);
             }
@@ -69,7 +65,7 @@ namespace WindowsFormsClientApplication
         /// <param name="queryableData"></param>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        private double? GetAverage<T>(IQueryable<T> queryableData, string propertyName)
+        private static double? GetAverage<T>(IQueryable<T> queryableData, string propertyName)
         {
             var arg            = Expression.Parameter(typeof(T), "x");
             var pi             = typeof(T).GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
@@ -113,52 +109,25 @@ namespace WindowsFormsClientApplication
         private void PopulateMainListView()
         {
             // TODO: These PopulateView are similar. Refactor them when I have a chance!
-            // Main list
-            var bindingList = new SortableBindingList<Item>(_dataList);
-            var source = new BindingSource(bindingList, null);
+            var bindingList         = new SortableBindingList<Item>(_dataList);
+            var source              = new BindingSource(bindingList, null);
             dataGridView.DataSource = source;
         }
 
         private void PopulateGoodChannelView()
         {
-            // Good
             _goodList.Add(_goodChannelAverage);
-            var goodBindingList = new SortableBindingList<View_RawNoRegime_Good>(_goodList);
-            var goodBindingSource = new BindingSource(goodBindingList, null);
+            var goodBindingList         = new SortableBindingList<View_RawNoRegime_Good>(_goodList);
+            var goodBindingSource       = new BindingSource(goodBindingList, null);
             goodDataGridView.DataSource = goodBindingSource;
         }
 
         private void PopulateBadChannelView()
         {
-            // Bad
             _badList.Add(_badChannelAverage);
-            var badBindingList = new SortableBindingList<View_RawNoRegime_Bad>(_badList);
-            var badBindingSource = new BindingSource(badBindingList, null);
+            var badBindingList         = new SortableBindingList<View_RawNoRegime_Bad>(_badList);
+            var badBindingSource       = new BindingSource(badBindingList, null);
             badDataGridView.DataSource = badBindingSource;
-        }
-    }
-
-    public class Item
-    {
-        public string Channel { get; private set; }
-        public double? Good { get; private set; }
-        public double? Bad { get; private set; }
-        public double? Diff { get; private set; }
-
-        public double? Absolute { get; private set; }
-
-        public Item(string name, double? good, double? bad)
-        {
-            // TODO: Check for NULL (Not sure if we need too!)
-            Channel = name;
-            Good    = good;
-            Bad     = bad;
-            Diff    = (Good - Bad) / Bad;
-
-            if (Diff != null)
-            {
-                Absolute = Math.Abs((double) Diff);
-            }
         }
     }
 }
