@@ -4,11 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3da6805dc8994c0fabc38e95c37d874f" Name="Diagram1" ZoomLevel="100">
-        <EntityTypeShape EntityType="GAModel.RawNoRegime" Width="1.5" PointX="8.125" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GAModel.View_RawNoRegime_Bad" Width="2.125" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GAModel.View_RawNoRegime_Good" Width="2" PointX="5.25" PointY="0.75" IsExpanded="true" />
-      </Diagram>
+      <Diagram DiagramId="6a66c78e5a6a4997b6433a97642169fa" Name="Diagram1" />
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

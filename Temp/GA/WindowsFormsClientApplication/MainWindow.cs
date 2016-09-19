@@ -12,14 +12,13 @@ namespace WindowsFormsClientApplication
 {
     public partial class MainWindow : Form
     {
-        private readonly List<Item> _dataList = new List<Item>();
-        private readonly List<string> _columns = new List<string>();
+        private readonly List<Item> _dataList                      = new List<Item>();
+        private readonly List<PropertyInfo> _columns               = new List<PropertyInfo>();
+        private readonly View_RawNoRegime_Good _goodChannelAverage = new View_RawNoRegime_Good();
+        private readonly View_RawNoRegime_Bad _badChannelAverage   = new View_RawNoRegime_Bad();
 
         private List<View_RawNoRegime_Good> _goodList;
         private List<View_RawNoRegime_Bad> _badList;
-
-        private readonly View_RawNoRegime_Good _goodChannelAverage = new View_RawNoRegime_Good();
-        private readonly View_RawNoRegime_Bad _badChannelAverage = new View_RawNoRegime_Bad();
         
         public MainWindow()
         {
@@ -28,6 +27,10 @@ namespace WindowsFormsClientApplication
 
         private void getDataButton_Click(object sender, EventArgs e)
         {
+            if (_dataList.Count > 0) _dataList.Clear();
+            if (_goodList != null && _goodList.Count > 0) _goodList.Clear();
+            if (_badList != null && _badList.Count > 0) _badList.Clear();
+
             GetDataFromDatabase();
             GetAllColumnNames();
             BuildDataList();
@@ -51,10 +54,11 @@ namespace WindowsFormsClientApplication
         private void GetAllColumnNames()
         {
             if (_goodList.Count <= 0) return;
+            if (_columns.Count > 0) return;
 
             foreach (var pi in _goodList[0].GetType().GetProperties())
             {
-                _columns.Add(pi.Name);
+                _columns.Add(pi);
             }
         }
 
@@ -86,20 +90,16 @@ namespace WindowsFormsClientApplication
 
             foreach (var column in _columns)
             {
-                // TODO: Find a better to exclude columns that we're not going to calculate an average for.
-                if (column == "Index" || column == "TAIL" || column == "Flight" || column == "Seq_" ||
-                    column == "Version" || column == "FltHrs" || column == "FltDate" || column == "FREQ" ||
-                    column == "min_System_Amp__A_" || column == "max_System_Amp__A_" || column == "µ_System_Amp__A_" || column == "s_System_Amp__A_")
-                    continue;
+                if (!column.PropertyType.FullName.Contains("System.Double")) continue;
 
-                var goodChannelAverage = GetAverage(_goodList.AsQueryable(), column);
-                var badChannelAverage  = GetAverage(_badList.AsQueryable(), column);
-                var item               = new Item(column, goodChannelAverage, badChannelAverage);
+                var goodChannelAverage = GetAverage(_goodList.AsQueryable(), column.Name);
+                var badChannelAverage  = GetAverage(_badList.AsQueryable(), column.Name);
+                var item               = new Item(column.Name, goodChannelAverage, badChannelAverage);
 
-                var property = typeof(View_RawNoRegime_Good).GetProperty(column);
+                var property = typeof(View_RawNoRegime_Good).GetProperty(column.Name);
                 property.SetValue(_goodChannelAverage, goodChannelAverage);
 
-                property = typeof(View_RawNoRegime_Bad).GetProperty(column);
+                property = typeof(View_RawNoRegime_Bad).GetProperty(column.Name);
                 property.SetValue(_badChannelAverage, badChannelAverage);
 
                 _dataList.Add(item);
@@ -120,6 +120,12 @@ namespace WindowsFormsClientApplication
             var goodBindingList         = new SortableBindingList<View_RawNoRegime_Good>(_goodList);
             var goodBindingSource       = new BindingSource(goodBindingList, null);
             goodDataGridView.DataSource = goodBindingSource;
+
+            // Testing Syncfusion datagrid
+            gridDataBoundGrid1.DataSource = goodBindingSource;
+
+            //var averageRow = new GridSummaryRow();
+            gridGroupingControl1.DataSource = goodBindingSource;
         }
 
         private void PopulateBadChannelView()

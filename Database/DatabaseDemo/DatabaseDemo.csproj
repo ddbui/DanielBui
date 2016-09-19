@@ -71,15 +71,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RawNoRegime.cs">
-      <DependentUpon>gaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="View_RawNoRegime_Bad.cs">
-      <DependentUpon>gaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="View_RawNoRegime_Good.cs">
-      <DependentUpon>gaModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

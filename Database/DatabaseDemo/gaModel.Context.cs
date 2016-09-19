@@ -25,8 +25,5 @@ namespace DatabaseDemo
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<RawNoRegime> RawNoRegimes { get; set; }
-        public virtual DbSet<View_RawNoRegime_Bad> View_RawNoRegime_Bad { get; set; }
-        public virtual DbSet<View_RawNoRegime_Good> View_RawNoRegime_Good { get; set; }
     }
 }

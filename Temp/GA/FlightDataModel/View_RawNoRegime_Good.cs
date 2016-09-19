@@ -15,13 +15,13 @@ namespace FlightDataModel
     public partial class View_RawNoRegime_Good
     {
         public int Index { get; set; }
-        public Nullable<double> TAIL { get; set; }
-        public Nullable<double> Flight { get; set; }
-        public Nullable<double> Seq_ { get; set; }
+        public Nullable<int> TAIL { get; set; }
+        public Nullable<int> Flight { get; set; }
+        public Nullable<int> Seq_ { get; set; }
         public string Version { get; set; }
         public Nullable<double> FltHrs { get; set; }
         public Nullable<System.DateTime> FltDate { get; set; }
-        public Nullable<double> FREQ { get; set; }
+        public Nullable<int> FREQ { get; set; }
         public Nullable<double> µ_Airspeed_hold_on { get; set; }
         public Nullable<double> OneCount { get; set; }
         public Nullable<double> min_Alt_MSL__ft_ { get; set; }

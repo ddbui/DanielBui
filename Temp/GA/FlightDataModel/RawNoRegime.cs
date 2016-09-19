@@ -7,33 +7,37 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DatabaseDemo
+namespace FlightDataModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class View_RawNoRegime_Good
+    public partial class RawNoRegime
     {
         public int Index { get; set; }
-        public Nullable<double> TAIL { get; set; }
-        public Nullable<double> Flight { get; set; }
-        public Nullable<double> Seq_ { get; set; }
+        public Nullable<int> TAIL { get; set; }
+        public Nullable<int> Flight { get; set; }
+        public Nullable<int> Seq_ { get; set; }
         public string Version { get; set; }
         public Nullable<double> FltHrs { get; set; }
         public Nullable<System.DateTime> FltDate { get; set; }
-        public Nullable<double> FREQ { get; set; }
+        public Nullable<int> FREQ { get; set; }
         public Nullable<double> µ_Airspeed_hold_on { get; set; }
+        public Nullable<double> OneCount { get; set; }
         public Nullable<double> min_Alt_MSL__ft_ { get; set; }
         public Nullable<double> max_Alt_MSL__ft_ { get; set; }
         public Nullable<double> µ_Alt_MSL__ft_ { get; set; }
         public Nullable<double> s_Alt_MSL__ft_ { get; set; }
         public Nullable<double> µ_Altitude_hold_on { get; set; }
+        public Nullable<double> OneCount1 { get; set; }
         public Nullable<double> µ_Azimuth_hold_on { get; set; }
+        public Nullable<double> OneCount2 { get; set; }
         public Nullable<double> min_Bat_2_Volt__V_ { get; set; }
         public Nullable<double> max_Bat_2_Volt__V_ { get; set; }
         public Nullable<double> µ_Bat_2_Volt__V_ { get; set; }
         public Nullable<double> s_Bat_2_Volt__V_ { get; set; }
         public Nullable<double> µ_Battery_leaking_current_ { get; set; }
+        public Nullable<double> OneCount3 { get; set; }
         public Nullable<double> min_Bus_1_Bat_Gnd_Amp__A_ { get; set; }
         public Nullable<double> max_Bus_1_Bat_Gnd_Amp__A_ { get; set; }
         public Nullable<double> µ_Bus_1_Bat_Gnd_Amp__A_ { get; set; }
@@ -95,7 +99,9 @@ namespace DatabaseDemo
         public Nullable<double> µ_Eng_Torque { get; set; }
         public Nullable<double> s_Eng_Torque { get; set; }
         public Nullable<double> µ_GCU_inhibit { get; set; }
+        public Nullable<double> OneCount4 { get; set; }
         public Nullable<double> µ_GCU_reset { get; set; }
+        public Nullable<double> OneCount5 { get; set; }
         public Nullable<double> min_GCU_Temp__DEG_ { get; set; }
         public Nullable<double> max_GCU_Temp__DEG_ { get; set; }
         public Nullable<double> µ_GCU_Temp__DEG_ { get; set; }
@@ -113,6 +119,7 @@ namespace DatabaseDemo
         public Nullable<double> µ_GPS_Alt__ft_ { get; set; }
         public Nullable<double> s_GPS_Alt__ft_ { get; set; }
         public Nullable<double> µ_In_flight_reset_detected_by_UAV { get; set; }
+        public Nullable<double> OneCount6 { get; set; }
         public Nullable<double> min_Norm_Accel__g_ { get; set; }
         public Nullable<double> max_Norm_Accel__g_ { get; set; }
         public Nullable<double> µ_Norm_Accel__g_ { get; set; }
@@ -142,6 +149,7 @@ namespace DatabaseDemo
         public Nullable<double> µ_Power_Lvr_Cmd { get; set; }
         public Nullable<double> s_Power_Lvr_Cmd { get; set; }
         public Nullable<double> µ_Preprogrammed_mode_on { get; set; }
+        public Nullable<double> OneCount7 { get; set; }
         public Nullable<double> min_Pri_AS__KIAS_ { get; set; }
         public Nullable<double> max_Pri_AS__KIAS_ { get; set; }
         public Nullable<double> µ_Pri_AS__KIAS_ { get; set; }
@@ -163,6 +171,7 @@ namespace DatabaseDemo
         public string µ_System_Amp__A_ { get; set; }
         public string s_System_Amp__A_ { get; set; }
         public Nullable<double> µ_Tq_Loop_Health { get; set; }
+        public Nullable<double> OneCount8 { get; set; }
         public Nullable<double> min_Up_Sawtooth { get; set; }
         public Nullable<double> max_Up_Sawtooth { get; set; }
         public Nullable<double> µ_Up_Sawtooth { get; set; }
@@ -179,14 +188,5 @@ namespace DatabaseDemo
         public Nullable<double> max_Yaw_Rate__DEG_ { get; set; }
         public Nullable<double> µ_Yaw_Rate__DEG_ { get; set; }
         public Nullable<double> s_Yaw_Rate__DEG_ { get; set; }
-        public Nullable<double> OneCnt_Airspeed_hold_on { get; set; }
-        public Nullable<double> OneCnt_Altitude_hold_on { get; set; }
-        public Nullable<double> OneCnt_Azimuth_hold_on { get; set; }
-        public Nullable<double> OneCnt_Battery_leaking_current { get; set; }
-        public Nullable<double> OneCnt_GCU_inhibit { get; set; }
-        public Nullable<double> OneCnt_GCU_reset { get; set; }
-        public Nullable<double> OneCnt_In_flight_reset_detected_by_UAV { get; set; }
-        public Nullable<double> OneCnt_Preprogrammed_mode_on { get; set; }
-        public Nullable<double> OneCnt_Tq_Loop_Health { get; set; }
     }
 }

@@ -161,7 +161,8 @@ else
     WinMinimize
 }
 
-Sleep, 2000
+; The cover image sometimes takes a while to reappear. POS!
+Sleep, 4000
 
 ;Once the viewer shows up, we need to figure out where the cover, a .jpeg file, is.
 ;Most likely it will be in here "C:\Users\buidan\AppData\Local\Temp\calibre_*" 
@@ -181,15 +182,9 @@ Loop, Files, C:\Users\buidan\AppData\Local\Temp\*.*, R
     extension = %A_LoopFileExt%  
     size = %A_LoopFileSize%       
     
-    if InStr(A_LoopFileFullPath, "calibre") AND (extension = "opf" OR extension = "html")
-    {
-        ; A better idea might be look for *cover*.html
-        OutputDebug, [ahk]: %name%                
-    }
-    
     if InStr(A_LoopFileFullPath, "calibre") AND (extension = "jpg" OR extension = "jpeg" OR extension = "png")
     {            
-        OutputDebug, [ahk]: %name%        
+        OutputDebug, [ahk]: Line 186, %name%        
         
         if (InStr(name, "cover") OR InStr(name, "cvi")) AND !InStr(name, "back")
         {

@@ -80,8 +80,18 @@ Demo/ParallelProgramming/bin
 Demo/ParallelProgramming/obj
 Demo/ParallelProgramming/_ReSharper.ParallelProgrammingDemo
 Demo/StaticConstructor
-Database/DatabaseDemo/bin
-Database/DatabaseDemo/obj
+Database/DatabaseDemo
+Temp/GA/FlightDataModel/bin
+Temp/GA/FlightDataModel/obj
+Temp/GA/RawDataProcessor/
+Temp/GA/SharedLibrary/bin
+Temp/GA/SharedLibrary/obj
+Temp/GA/WindowsFormsClientApplication/bin
+Temp/GA/WindowsFormsClientApplication/obj
+Temp/GA/ASI_Daniel
+Temp/GA/GenericParsing/bin
+Temp/GA/GenericParsing/obj
+Temp/GA/CsvFileReader
 
 #Just for now, turn it back on later
 Application/LesFlorist
