@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using CsvHelper;
 using DgvFilterPopup;
 using FlightDataModel;
+using GenericParsing;
 using SharedLibrary;
 
 namespace WindowsFormsClientApplication
@@ -399,39 +400,37 @@ namespace WindowsFormsClientApplication
         }
 
         private List<FlightItem> _flights;
+        private DataTable _dataReadFromCsvFile;
+        private DataTable _dtGoodFlights;
+        private DataTable _dtBadFlights;
         private List<FlightItem> _goodFlights           = new List<FlightItem>();
         private List<FlightItem> _badFlights            = new List<FlightItem>();
         private readonly FlightItem _goodChannelAverage = new FlightItem();
         private readonly FlightItem _badChannelAverage  = new FlightItem();
         private readonly List<Item> _dataList           = new List<Item>();
-        private readonly List<PropertyInfo> _columns    = new List<PropertyInfo>();
+        private readonly List<string> _columns    = new List<string>();
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            if (GetDataFromFile()) return;
+            if (!GetDataFromFile()) return;
 
-            PopulateData();
-            GetAllColumnNames();
+            AssignDataToGridViewForDisplay();
+
             BuildDataList();
-
             PopulateMainListView();
-            DisplayGoodFlights();
-            DisplayBadFlights();
+
+            //GetAllColumnNames();
+            
+            
+            //DisplayGoodFlights();
+            //DisplayBadFlights();
         }
 
-        private void PopulateData()
+        private void AssignDataToGridViewForDisplay()
         {
-            var bindingList       = new SortableBindingList<FlightItem>(_flights);
-            var source            = new BindingSource(bindingList, null);
-            dgvResults.DataSource = source;
-
-            _goodFlights = (from f in _flights
-                            where f.Tail == 4071
-                            select f).ToList();
-
-            _badFlights = (from f in _flights
-                           where f.Tail != 4071
-                           select f).ToList();
+            dgvResults.DataSource             = _dataReadFromCsvFile;
+            goodFlightDataGridView.DataSource = _dtGoodFlights;
+            badFlightDataGridView.DataSource  = _dtBadFlights;
         }
 
         private bool GetDataFromFile()
@@ -442,55 +441,98 @@ namespace WindowsFormsClientApplication
                 Filter = "CSV Files|*.csv"
             };
 
-            if (dlg.ShowDialog() != DialogResult.OK) return true;
+            if (dlg.ShowDialog() != DialogResult.OK) return false;
 
-            // We'll use CsvHelper to read the CSV file.
-            // https://joshclose.github.io/CsvHelper/
-
-            using (var reader = File.OpenText(dlg.FileName))
+            using (var parser = new GenericParserAdapter(dlg.FileName))
             {
-                try
-                {
-                    var csv  = new CsvReader(reader);
-                    csv.Configuration.RegisterClassMap<CsvFileDefinitionMap>();
-                    _flights = csv.GetRecords<FlightItem>().ToList();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                parser.FirstRowHasHeader = true;
+                _dataReadFromCsvFile = parser.GetDataTable();
             }
-            return false;
+
+            if (_dataReadFromCsvFile.Rows.Count == 0) return false;
+
+            var dtCloned = _dataReadFromCsvFile.Clone();
+
+            foreach (DataColumn column in dtCloned.Columns)
+            {
+                // Test a few values to see if it's a double.
+                bool isDouble = true;
+                const int testNumber = 3;
+
+                for (int i = 0; i < testNumber && i < _dataReadFromCsvFile.Rows.Count; i++)
+                {
+                    double value;
+                    if (!double.TryParse(_dataReadFromCsvFile.Rows[0][column.ColumnName].ToString(), out value))
+                    {
+                        isDouble = false;
+                    }
+                }
+                if (isDouble) column.DataType = typeof(double);
+            }
+
+            for(int row = 0; row < _dataReadFromCsvFile.Rows.Count; row++)
+            {
+                // We cannot allow empty string so we replace them, if any, with "0"
+                for (int column = 0; column < _dataReadFromCsvFile.Rows[row].ItemArray.Length; column++)
+                {
+                    if (string.IsNullOrEmpty(_dataReadFromCsvFile.Rows[row][column].ToString()) || 
+                        string.IsNullOrWhiteSpace(_dataReadFromCsvFile.Rows[row][column].ToString()))
+                    {
+                        _dataReadFromCsvFile.Rows[row][column] = "0";
+                    }
+                }
+
+                dtCloned.ImportRow(_dataReadFromCsvFile.Rows[row]);
+            }
+
+            var expression = "TAIL = 4071";
+            var rows = dtCloned.Select(expression);
+            _dtGoodFlights = rows.CopyToDataTable();
+
+            expression = "TAIL <> 4071";
+            rows = dtCloned.Select(expression);
+            _dtBadFlights = rows.CopyToDataTable();
+
+            return true;
         }
 
         private void GetAllColumnNames()
         {
-            if (_goodFlights.Count <= 0) return;
-            if (_columns.Count > 0) return;
-
-            foreach (var pi in _goodFlights[0].GetType().GetProperties())
+            foreach (var column in _dataReadFromCsvFile.Columns)
             {
-                _columns.Add(pi);
+                _columns.Add(column.ToString());
             }
         }
 
         private void BuildDataList()
         {
+            GetAllColumnNames();
+
             if (_columns.Count <= 0) return;
 
             foreach (var column in _columns)
             {
-                if (!column.PropertyType.FullName.Contains("System.Double")) continue;
+                //if (!column.PropertyType.FullName.Contains("System.Double")) continue;
 
-                var goodChannelAverage = GetAverage(_goodFlights.AsQueryable(), column.Name);
-                var badChannelAverage  = GetAverage(_badFlights.AsQueryable(), column.Name);
-                var item               = new Item(column.Name, goodChannelAverage, badChannelAverage);
+                //var goodChannelAverage = GetAverage(_goodFlights.AsQueryable(), column);
+                //var badChannelAverage  = GetAverage(_badFlights.AsQueryable(), column);
 
-                var property = typeof(FlightItem).GetProperty(column.Name);
-                property.SetValue(_goodChannelAverage, goodChannelAverage);
+                if (_dtGoodFlights.Columns[column].DataType.Name != "Double" ||
+                    _dtBadFlights.Columns[column].DataType.Name != "Double")
+                {
+                    continue;
+                }
 
-                property = typeof(FlightItem).GetProperty(column.Name);
-                property.SetValue(_badChannelAverage, badChannelAverage);
+                var goodChannelAverage = _dtGoodFlights.AsEnumerable().Average(r => r.Field<double>(column));
+                var badChannelAverage = _dtBadFlights.AsEnumerable().Average(r => r.Field<double>(column));
+
+                var item               = new Item(column, goodChannelAverage, badChannelAverage);
+
+                //var property = typeof(FlightItem).GetProperty(column);
+                //property.SetValue(_goodChannelAverage, goodChannelAverage);
+
+                //property = typeof(FlightItem).GetProperty(column);
+                //property.SetValue(_badChannelAverage, badChannelAverage);
 
                 _dataList.Add(item);
             }
