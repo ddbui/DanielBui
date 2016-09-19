@@ -146,6 +146,10 @@
       <Project>{91fb155f-ec92-4d8c-9852-4cf0595144a5}</Project>
       <Name>FlightDataModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GenericParsing\GenericParsing.csproj">
+      <Project>{add325f8-cbd9-43fe-850d-e2f34d736c9d}</Project>
+      <Name>GenericParsing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharedLibrary\SharedLibrary.csproj">
       <Project>{d0b49de0-4fbe-457e-bbde-481ccb8988c9}</Project>
       <Name>SharedLibrary</Name>
