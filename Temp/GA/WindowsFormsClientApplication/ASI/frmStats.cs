@@ -445,14 +445,14 @@ namespace WindowsFormsClientApplication
 
         private void BuildBadFlightDataTable(DataTable dtCloned)
         {
-            const string expression = "TAIL <> 4071";
+            const string expression = "TAIL <> '4071'";
             var rows                = dtCloned.Select(expression);
             _dtBadFlights           = rows.CopyToDataTable();
         }
 
         private void BuildGoodFlightDataTable(DataTable dtCloned)
         {
-            const string expression = "TAIL = 4071";
+            const string expression = "TAIL = '4071'";
             var rows                = dtCloned.Select(expression);
             _dtGoodFlights          = rows.CopyToDataTable();
         }
@@ -537,6 +537,17 @@ namespace WindowsFormsClientApplication
 
             goodFlightDataGridView.DataSource = _dtGoodFlights;
             badFlightDataGridView.DataSource  = _dtBadFlights;
+
+            Debug.WriteLine($"There are {_dataList.Count} items, {_dtGoodFlights.Rows.Count - 1} are good, and {_dtBadFlights.Rows.Count - 1} are bad.");
+        }
+
+        private void selectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var count = averageDataGridView.SelectedRows.Count;
+
+            if (count == 0) return;
+
+            MessageBox.Show($"There are {count} item(s) selected.");
         }
     }
 }
