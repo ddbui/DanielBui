@@ -510,14 +510,21 @@ namespace WindowsFormsClientApplication
                     continue;
                 }
 
-                var goodChannelAverage = _dtGoodFlights.AsEnumerable().Average(r => r.Field<double>(column));
-                var badChannelAverage  = _dtBadFlights.AsEnumerable().Average(r => r.Field<double>(column));
-                var item               = new Item(column, goodChannelAverage, badChannelAverage);
+                try
+                {
+                    var goodChannelAverage = _dtGoodFlights.AsEnumerable().Average(r => r.Field<double>(column));
+                    var badChannelAverage  = _dtBadFlights.AsEnumerable().Average(r => r.Field<double>(column));
+                    var item               = new Item(column, goodChannelAverage, badChannelAverage);
 
-                goodFlightAverageRow[column] = goodChannelAverage;
-                badFlightAverageRow[column]  = badChannelAverage;
+                    goodFlightAverageRow[column] = goodChannelAverage;
+                    badFlightAverageRow[column] = badChannelAverage;
 
-                _dataList.Add(item);
+                    _dataList.Add(item);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
             _dtGoodFlights.Rows.Add(goodFlightAverageRow);
