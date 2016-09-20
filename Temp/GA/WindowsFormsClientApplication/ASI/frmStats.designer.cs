@@ -55,6 +55,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStats));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -102,10 +111,10 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.inputDataGridView = new System.Windows.Forms.DataGridView();
-            this.goodFlightDataGridView = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.badFlightDataGridView = new System.Windows.Forms.DataGridView();
+            this.goodFlightDataGridView = new System.Windows.Forms.DataGridView();
+            this.averageDataGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -129,10 +138,10 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inputDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.goodFlightDataGridView)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.badFlightDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.goodFlightDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.averageDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -882,10 +891,9 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.inputDataGridView);
+            this.tabPage1.Controls.Add(this.averageDataGridView);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(604, 209);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Averages";
@@ -896,32 +904,10 @@
             this.tabPage2.Controls.Add(this.goodFlightDataGridView);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(604, 209);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Good Flights";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // inputDataGridView
-            // 
-            this.inputDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.inputDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.inputDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inputDataGridView.Location = new System.Drawing.Point(3, 3);
-            this.inputDataGridView.Name = "inputDataGridView";
-            this.inputDataGridView.RowTemplate.Height = 24;
-            this.inputDataGridView.Size = new System.Drawing.Size(598, 203);
-            this.inputDataGridView.TabIndex = 0;
-            // 
-            // goodFlightDataGridView
-            // 
-            this.goodFlightDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.goodFlightDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.goodFlightDataGridView.Location = new System.Drawing.Point(3, 3);
-            this.goodFlightDataGridView.Name = "goodFlightDataGridView";
-            this.goodFlightDataGridView.RowTemplate.Height = 24;
-            this.goodFlightDataGridView.Size = new System.Drawing.Size(598, 203);
-            this.goodFlightDataGridView.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -935,13 +921,120 @@
             // 
             // badFlightDataGridView
             // 
+            this.badFlightDataGridView.AllowUserToAddRows = false;
+            this.badFlightDataGridView.AllowUserToDeleteRows = false;
+            this.badFlightDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.badFlightDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle34.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle34.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.badFlightDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle34;
             this.badFlightDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle35.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.badFlightDataGridView.DefaultCellStyle = dataGridViewCellStyle35;
             this.badFlightDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.badFlightDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.badFlightDataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.badFlightDataGridView.Name = "badFlightDataGridView";
-            this.badFlightDataGridView.RowTemplate.Height = 24;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle36.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle36.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.badFlightDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle36;
+            this.badFlightDataGridView.RowHeadersVisible = false;
             this.badFlightDataGridView.Size = new System.Drawing.Size(604, 209);
-            this.badFlightDataGridView.TabIndex = 0;
+            this.badFlightDataGridView.TabIndex = 1;
+            // 
+            // goodFlightDataGridView
+            // 
+            this.goodFlightDataGridView.AllowUserToAddRows = false;
+            this.goodFlightDataGridView.AllowUserToDeleteRows = false;
+            this.goodFlightDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.goodFlightDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle31.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle31.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.goodFlightDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
+            this.goodFlightDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.goodFlightDataGridView.DefaultCellStyle = dataGridViewCellStyle32;
+            this.goodFlightDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.goodFlightDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.goodFlightDataGridView.Margin = new System.Windows.Forms.Padding(4);
+            this.goodFlightDataGridView.Name = "goodFlightDataGridView";
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle33.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle33.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.goodFlightDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle33;
+            this.goodFlightDataGridView.RowHeadersVisible = false;
+            this.goodFlightDataGridView.Size = new System.Drawing.Size(604, 209);
+            this.goodFlightDataGridView.TabIndex = 2;
+            // 
+            // averageDataGridView
+            // 
+            this.averageDataGridView.AllowUserToAddRows = false;
+            this.averageDataGridView.AllowUserToDeleteRows = false;
+            this.averageDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.averageDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.averageDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle28;
+            this.averageDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.averageDataGridView.DefaultCellStyle = dataGridViewCellStyle29;
+            this.averageDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.averageDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.averageDataGridView.Margin = new System.Windows.Forms.Padding(4);
+            this.averageDataGridView.Name = "averageDataGridView";
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle30.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.averageDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle30;
+            this.averageDataGridView.RowHeadersVisible = false;
+            this.averageDataGridView.Size = new System.Drawing.Size(604, 209);
+            this.averageDataGridView.TabIndex = 2;
             // 
             // frmStats
             // 
@@ -981,10 +1074,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.inputDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.goodFlightDataGridView)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.badFlightDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.goodFlightDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.averageDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1036,10 +1129,10 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.DataGridView inputDataGridView;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView goodFlightDataGridView;
         private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataGridView averageDataGridView;
+        private System.Windows.Forms.DataGridView goodFlightDataGridView;
         private System.Windows.Forms.DataGridView badFlightDataGridView;
     }
 }
