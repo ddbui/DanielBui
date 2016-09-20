@@ -531,9 +531,9 @@ namespace WindowsFormsClientApplication
 
         private void PopulateOutputDataGridView()
         {
-            var bindingList              = new SortableBindingList<Item>(_dataList);
-            var source                   = new BindingSource(bindingList, null);
-            inputDataGridView.DataSource = source;
+            var bindingList                = new SortableBindingList<Item>(_dataList);
+            var source                     = new BindingSource(bindingList, null);
+            averageDataGridView.DataSource = source;
 
             goodFlightDataGridView.DataSource = _dtGoodFlights;
             badFlightDataGridView.DataSource  = _dtBadFlights;
