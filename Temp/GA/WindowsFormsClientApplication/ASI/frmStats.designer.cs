@@ -112,12 +112,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.averageDataGridView = new System.Windows.Forms.DataGridView();
+            this.averageContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.goodFlightDataGridView = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.badFlightDataGridView = new System.Windows.Forms.DataGridView();
-            this.averageContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -141,11 +141,11 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.averageDataGridView)).BeginInit();
+            this.averageContextMenuStrip.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.goodFlightDataGridView)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.badFlightDataGridView)).BeginInit();
-            this.averageContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -909,7 +909,7 @@
             this.averageDataGridView.AllowUserToDeleteRows = false;
             this.averageDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.averageDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle28.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle28.ForeColor = System.Drawing.Color.White;
@@ -943,6 +943,21 @@
             this.averageDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.averageDataGridView.Size = new System.Drawing.Size(604, 209);
             this.averageDataGridView.TabIndex = 2;
+            // 
+            // averageContextMenuStrip
+            // 
+            this.averageContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.averageContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selectToolStripMenuItem});
+            this.averageContextMenuStrip.Name = "averageContextMenuStrip";
+            this.averageContextMenuStrip.Size = new System.Drawing.Size(125, 30);
+            // 
+            // selectToolStripMenuItem
+            // 
+            this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
+            this.selectToolStripMenuItem.Size = new System.Drawing.Size(124, 26);
+            this.selectToolStripMenuItem.Text = "Select";
+            this.selectToolStripMenuItem.Click += new System.EventHandler(this.selectToolStripMenuItem_Click);
             // 
             // tabPage2
             // 
@@ -1042,21 +1057,6 @@
             this.badFlightDataGridView.Size = new System.Drawing.Size(604, 209);
             this.badFlightDataGridView.TabIndex = 1;
             // 
-            // averageContextMenuStrip
-            // 
-            this.averageContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.averageContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.selectToolStripMenuItem});
-            this.averageContextMenuStrip.Name = "averageContextMenuStrip";
-            this.averageContextMenuStrip.Size = new System.Drawing.Size(182, 58);
-            // 
-            // selectToolStripMenuItem
-            // 
-            this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
-            this.selectToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.selectToolStripMenuItem.Text = "Select";
-            this.selectToolStripMenuItem.Click += new System.EventHandler(this.selectToolStripMenuItem_Click);
-            // 
             // frmStats
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1095,11 +1095,11 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.averageDataGridView)).EndInit();
+            this.averageContextMenuStrip.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.goodFlightDataGridView)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.badFlightDataGridView)).EndInit();
-            this.averageContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

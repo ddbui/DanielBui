@@ -96,7 +96,6 @@
     </Compile>
     <Compile Include="ASI\Global.cs" />
     <Compile Include="CsvFileDefinitionMap.cs" />
-    <Compile Include="Item.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +141,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataParser\DataParser.csproj">
+      <Project>{cc8003d3-9e73-4c10-ae7c-6239340d6fe5}</Project>
+      <Name>DataParser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FlightDataModel\FlightDataModel.csproj">
       <Project>{91fb155f-ec92-4d8c-9852-4cf0595144a5}</Project>
       <Name>FlightDataModel</Name>

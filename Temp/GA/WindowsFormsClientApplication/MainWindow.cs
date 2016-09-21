@@ -7,6 +7,7 @@ using FlightDataModel;
 using SharedLibrary;
 using System.Reflection;
 using System.Linq.Expressions;
+using DataParser;
 
 namespace WindowsFormsClientApplication
 {

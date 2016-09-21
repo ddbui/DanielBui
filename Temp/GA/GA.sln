@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvFileReader", "CsvFileRea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericParsing", "GenericParsing\GenericParsing.csproj", "{ADD325F8-CBD9-43FE-850D-E2F34D736C9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataParser", "DataParser\DataParser.csproj", "{CC8003D3-9E73-4C10-AE7C-6239340D6FE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{ADD325F8-CBD9-43FE-850D-E2F34D736C9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADD325F8-CBD9-43FE-850D-E2F34D736C9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADD325F8-CBD9-43FE-850D-E2F34D736C9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC8003D3-9E73-4C10-AE7C-6239340D6FE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC8003D3-9E73-4C10-AE7C-6239340D6FE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC8003D3-9E73-4C10-AE7C-6239340D6FE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC8003D3-9E73-4C10-AE7C-6239340D6FE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

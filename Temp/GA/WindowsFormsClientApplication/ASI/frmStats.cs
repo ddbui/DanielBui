@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CsvHelper;
+using DataParser;
 using DgvFilterPopup;
 using FlightDataModel;
 using GenericParsing;
@@ -55,7 +56,8 @@ namespace WindowsFormsClientApplication
 
             if (faultIdSelected == -1)
             {
-                MessageBox.Show("Must First Select A Fault", "No Fault Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must First Select A Fault", "No Fault Selected", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
                 return;
             }
 
@@ -65,7 +67,10 @@ namespace WindowsFormsClientApplication
             DataTable dtAllResults = new DataTable();
 
 
-            List<DataGridViewRow> list = dgvSelectFlight.Rows.Cast<DataGridViewRow>().Where(k => Convert.ToBoolean(k.Cells["colChkBox"].Value) == true).ToList();
+            List<DataGridViewRow> list =
+                dgvSelectFlight.Rows.Cast<DataGridViewRow>()
+                    .Where(k => Convert.ToBoolean(k.Cells["colChkBox"].Value) == true)
+                    .ToList();
             if (this.dtFlights.Rows.Count > 0)
             {
                 this.pBar.Maximum = list.Count;
@@ -99,11 +104,14 @@ namespace WindowsFormsClientApplication
                     string seq = row.Cells["colGroupId"].Value.ToString();
                     double flthrs = Convert.ToDouble(row.Cells["colFlightHours"].Value);
                     string version = row.Cells["colVersion"].Value.ToString();
-                    
+
                     string fltdate = row.Cells["colDate"].Value.ToString();
 
                     //'''00188'' AS [TAIL], ''171'' AS [Flight], ''573'' AS [Seq#], 5.54 AS [FltHrs], ''6/17/2005 12:26:26 PM'' AS [FltDate]'
-                    string bascis = "'''" + sFaultId + "'' AS [FaultId], ''" + label + "'' AS [Label], ''" + tail + "'' AS [TAIL], ''" + flight + "'' AS [Flight], ''" + seq + "'' AS [Seq#], ''" + version + "'' AS [version], " + flthrs.ToString("0.00") + " AS [FltHrs], ''" + fltdate + "'' AS [FltDate]'";
+                    string bascis = "'''" + sFaultId + "'' AS [FaultId], ''" + label + "'' AS [Label], ''" + tail +
+                                    "'' AS [TAIL], ''" + flight + "'' AS [Flight], ''" + seq + "'' AS [Seq#], ''" +
+                                    version + "'' AS [version], " + flthrs.ToString("0.00") + " AS [FltHrs], ''" +
+                                    fltdate + "'' AS [FltDate]'";
 
                     string whereCond = GetWhereCondition(rootTable);
 
@@ -127,7 +135,7 @@ namespace WindowsFormsClientApplication
 
                     if (dtFlightResult.Rows.Count > 0)
                     {
-                        foreach(DataColumn dc in dtFlightResult.Columns)
+                        foreach (DataColumn dc in dtFlightResult.Columns)
                         {
                             if (dtFlightResult.Rows[0][dc.ColumnName].ToString().Trim() == "")
                             {
@@ -147,7 +155,7 @@ namespace WindowsFormsClientApplication
                         {
                             if (dtFlightResult.Columns.Count == dtAllResults.Columns.Count)
                             {
-                                dtAllResults.Merge(dtFlightResult,true, MissingSchemaAction.Ignore);
+                                dtAllResults.Merge(dtFlightResult, true, MissingSchemaAction.Ignore);
                             }
                         }
                     }
@@ -161,8 +169,8 @@ namespace WindowsFormsClientApplication
             stopWatch.Stop();
             TimeSpan ts = stopWatch.Elapsed;
             string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                        ts.Hours, ts.Minutes, ts.Seconds,
-                        ts.Milliseconds / 10);
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds/10);
 
             lblCurrentFile.Text = "Process Time: " + elapsedTime;
             this.dgvResults.DataSource = dtAllResults;
@@ -183,11 +191,15 @@ namespace WindowsFormsClientApplication
             DataTable dt = DB.GetTable(sql);
             return dt;
         }
+
         private DataTable FindTableAndMappedColForChannel(string channelName, DataTable dtSearchTable)
         {
 
             var results = dtSearchTable.AsEnumerable()
-                                        .Where(r => r.Field<string>("RootChannelName") == channelName && r.Field<string>("TABLE_NAME").StartsWith("M"));
+                .Where(
+                    r =>
+                        r.Field<string>("RootChannelName") == channelName &&
+                        r.Field<string>("TABLE_NAME").StartsWith("M"));
 
             DataTable dtResults = new DataTable();
 
@@ -204,7 +216,10 @@ namespace WindowsFormsClientApplication
         {
 
             var results = dtSearchTable.AsEnumerable()
-                                        .Where(r => r.Field<string>("RootChannelName_B") == channelName && r.Field<string>("TABLE_NAME").StartsWith("M"));
+                .Where(
+                    r =>
+                        r.Field<string>("RootChannelName_B") == channelName &&
+                        r.Field<string>("TABLE_NAME").StartsWith("M"));
 
             DataTable dtResults = new DataTable();
 
@@ -227,7 +242,8 @@ namespace WindowsFormsClientApplication
                 {
                     string channelName = "[" + f.Channel + "]";
                     DataTable dtMappedSensorColumns = GetColumnsAssociatedWithAZipFile(rootWithNoDotZip, f.DataType);
-                    DataTable dtMatchResults = FindTableAndMappedColForChannelWithBracket(channelName, dtMappedSensorColumns);
+                    DataTable dtMatchResults = FindTableAndMappedColForChannelWithBracket(channelName,
+                        dtMappedSensorColumns);
                     if (dtMatchResults.Rows.Count > 0)
                     {
                         string replaceWithName = "[" + dtMatchResults.Rows[0]["COLUMN_NAME"].ToString() + "]";
@@ -267,7 +283,7 @@ namespace WindowsFormsClientApplication
                     DataObject dataObj = dgvResults.GetClipboardContent();
                     Clipboard.SetDataObject(dataObj, true);
                     string sData = Clipboard.GetText();
-                    sData = this.lblSelectedFault.Text + "  " +   lblFilter.Text + "\n\n" + sData;
+                    sData = this.lblSelectedFault.Text + "  " + lblFilter.Text + "\n\n" + sData;
                     Clipboard.SetText(sData);
 
                     Cursor.Current = Cursors.Default;
@@ -301,7 +317,7 @@ namespace WindowsFormsClientApplication
 
         private void dgvFaults_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(dgvFaults.Columns[e.ColumnIndex].Name == "colSelect")
+            if (dgvFaults.Columns[e.ColumnIndex].Name == "colSelect")
             {
                 Cursor.Current = Cursors.WaitCursor;
                 this.faultIdSelected = Convert.ToInt32(dgvFaults.Rows[e.RowIndex].Cells["colFaultId"].Value);
@@ -313,7 +329,9 @@ namespace WindowsFormsClientApplication
                     isTrainingSet = "0";
                 }
 
-                dtFlights = DB.GetTable("EXEC sp_GetTailFlightRootTableChkWithFault " + faultIdSelected.ToString() + ", " + isTrainingSet);
+                dtFlights =
+                    DB.GetTable("EXEC sp_GetTailFlightRootTableChkWithFault " + faultIdSelected.ToString() + ", " +
+                                isTrainingSet);
                 this.dgvSelectFlight.DataSource = dtFlights;
 
                 fm = new DgvFilterManager(this.dgvSelectFlight, false);
@@ -344,7 +362,10 @@ namespace WindowsFormsClientApplication
                 string faultId = dgvFaults.Rows[e.RowIndex].Cells["colFaultId"].Value.ToString();
                 var t = Task<DataTable>.Factory.StartNew(() =>
                 {
-                    DataTable dtResult = DB.GetTable("SELECT [root_channel_name], [dataType] from [dbo].[_FaultRootChannels] where fault_id = " + faultId);
+                    DataTable dtResult =
+                        DB.GetTable(
+                            "SELECT [root_channel_name], [dataType] from [dbo].[_FaultRootChannels] where fault_id = " +
+                            faultId);
                     return dtResult;
                 });
 
@@ -359,7 +380,8 @@ namespace WindowsFormsClientApplication
                         msg = msg + dr["root_channel_name"].ToString() + "\n";
                     }
 
-                    MessageBox.Show(msg, "Channels Associted with " + faultName,MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MessageBox.Show(msg, "Channels Associted with " + faultName, MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
 
                 }
             }
@@ -368,7 +390,10 @@ namespace WindowsFormsClientApplication
 
         private void btnChkUnChk2_Click(object sender, EventArgs e)
         {
-            if (this.dgvSelectFlight.Rows.Count == 0) { return; }
+            if (this.dgvSelectFlight.Rows.Count == 0)
+            {
+                return;
+            }
             if (checkedState == false)
             {
                 CheckUnCheck(true, this.dgvSelectFlight, "colChkBox");
@@ -399,153 +424,69 @@ namespace WindowsFormsClientApplication
             Cursor.Current = Cursors.Default;
         }
 
-        private DataTable _dataReadFromCsvFile;
-        private DataTable _dtGoodFlights;
-        private DataTable _dtBadFlights;
-        private readonly List<Item> _dataList  = new List<Item>();
-        private readonly List<string> _columns = new List<string>();
+        private DataTable _rawData;
+        private DataTable _goodFlights;
+        private DataTable _badFlights;
+        private List<Item> _averageData;
+        private DataParser.DataParser _parser;
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            if (!GetDataFromFile()) return;
+            try
+            {
+                ProcessSelectedFile();
+            }
+            catch (Exception ex)
+            {
 
-            BuildAverageDataList();
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+
+        private void ProcessSelectedFile()
+        {
+            var filename = GetFileName();
+            if (string.IsNullOrEmpty(filename)) return;
+
+            _parser = new DataParser.DataParser(filename);
+            if (!_parser.Parse()) return;
+
             PopulateInputDataGridView();
             PopulateOutputDataGridView();
         }
 
-        private bool GetDataFromFile()
+        private static string GetFileName()
         {
             var dlg = new OpenFileDialog
             {
-                Title  = "Open CSV File",
-                Filter = "CSV Files|*.csv"
+                Title = @"Open CSV File",
+                Filter = @"CSV Files|*.csv"
             };
 
-            if (dlg.ShowDialog() != DialogResult.OK) return false;
-
-            using (var parser = new GenericParserAdapter(dlg.FileName))
-            {
-                parser.FirstRowHasHeader = true;
-                _dataReadFromCsvFile = parser.GetDataTable();
-            }
-
-            if (_dataReadFromCsvFile.Rows.Count == 0) return false;
-
-            var dtCloned = _dataReadFromCsvFile.Clone();
-
-            SetColumnDataType(dtCloned);
-            SetDefaultData(dtCloned);
-
-            BuildGoodFlightDataTable(dtCloned);
-            BuildBadFlightDataTable(dtCloned);
-
-            return true;
-        }
-
-        private void BuildBadFlightDataTable(DataTable dtCloned)
-        {
-            const string expression = "TAIL <> '4071'";
-            var rows                = dtCloned.Select(expression);
-            _dtBadFlights           = rows.CopyToDataTable();
-        }
-
-        private void BuildGoodFlightDataTable(DataTable dtCloned)
-        {
-            const string expression = "TAIL = '4071'";
-            var rows                = dtCloned.Select(expression);
-            _dtGoodFlights          = rows.CopyToDataTable();
-        }
-
-        private void SetDefaultData(DataTable dtCloned)
-        {
-            // The reason why we're not using foreeach here is we need to set the cell to "0"
-            for (var row = 0; row < _dataReadFromCsvFile.Rows.Count; row++)
-            {
-                // We cannot allow empty string so we replace them, if any, with "0"
-                for (var column = 0; column < _dataReadFromCsvFile.Rows[row].ItemArray.Length; column++)
-                {
-                    if (string.IsNullOrEmpty(_dataReadFromCsvFile.Rows[row][column].ToString()) ||
-                        string.IsNullOrWhiteSpace(_dataReadFromCsvFile.Rows[row][column].ToString()))
-                    {
-                        _dataReadFromCsvFile.Rows[row][column] = "0";
-                    }
-                }
-
-                dtCloned.ImportRow(_dataReadFromCsvFile.Rows[row]);
-            }
-        }
-
-        private static void SetColumnDataType(DataTable dtCloned)
-        {
-            foreach (DataColumn column in dtCloned.Columns)
-            {
-                if (column != null && column.ColumnName.Contains("_"))
-                    column.DataType = typeof(double);
-            }
-        }
-
-        private void GetAllColumnNames()
-        {
-            foreach (var column in _dataReadFromCsvFile.Columns)
-            {
-                _columns.Add(column.ToString());
-            }
-        }
-
-        private void BuildAverageDataList()
-        {
-            GetAllColumnNames();
-
-            if (_columns.Count <= 0) return;
-
-            var goodFlightAverageRow = _dtGoodFlights.NewRow();
-            var badFlightAverageRow  = _dtBadFlights.NewRow();
-
-            foreach (var column in _columns)
-            {
-                if (_dtGoodFlights.Columns[column].DataType.Name != "Double" ||
-                    _dtBadFlights.Columns[column].DataType.Name != "Double")
-                {
-                    continue;
-                }
-
-                try
-                {
-                    var goodChannelAverage = _dtGoodFlights.AsEnumerable().Average(r => r.Field<double>(column));
-                    var badChannelAverage  = _dtBadFlights.AsEnumerable().Average(r => r.Field<double>(column));
-                    var item               = new Item(column, goodChannelAverage, badChannelAverage);
-
-                    goodFlightAverageRow[column] = goodChannelAverage;
-                    badFlightAverageRow[column] = badChannelAverage;
-
-                    _dataList.Add(item);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-
-            _dtGoodFlights.Rows.Add(goodFlightAverageRow);
-            _dtBadFlights.Rows.Add(badFlightAverageRow);
+            return dlg.ShowDialog() != DialogResult.OK ? string.Empty : dlg.FileName;
         }
 
         private void PopulateInputDataGridView()
         {
-            dgvResults.DataSource = _dataReadFromCsvFile;
+            dgvResults.DataSource = _parser.RawData;
         }
 
         private void PopulateOutputDataGridView()
         {
-            var bindingList                = new SortableBindingList<Item>(_dataList);
+            var bindingList                = new SortableBindingList<Item>(_parser.AverageData);
             var source                     = new BindingSource(bindingList, null);
             averageDataGridView.DataSource = source;
 
-            goodFlightDataGridView.DataSource = _dtGoodFlights;
-            badFlightDataGridView.DataSource  = _dtBadFlights;
+            for (var index = 2; index < averageDataGridView.ColumnCount; index++)
+            {
+                averageDataGridView.Columns[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
 
-            Debug.WriteLine($"There are {_dataList.Count} items, {_dtGoodFlights.Rows.Count - 1} are good, and {_dtBadFlights.Rows.Count - 1} are bad.");
+            goodFlightDataGridView.DataSource = _parser.GoodFlights;
+            badFlightDataGridView.DataSource  = _parser.BadFlights;
+
+            Debug.WriteLine($"There are {_parser.AverageData.Count} items, {_parser.GoodFlights.Rows.Count - 1} are good, and {_parser.BadFlights.Rows.Count - 1} are bad.");
         }
 
         private void selectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -554,7 +495,7 @@ namespace WindowsFormsClientApplication
 
             if (count == 0) return;
 
-            MessageBox.Show($"There are {count} item(s) selected.");
+            MessageBox.Show($@"There are {count} item(s) selected.");
         }
     }
 }

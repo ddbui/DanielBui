@@ -92,6 +92,8 @@ Temp/GA/ASI_Daniel
 Temp/GA/GenericParsing/bin
 Temp/GA/GenericParsing/obj
 Temp/GA/CsvFileReader
+Temp/GA/DataParser/bin
+Temp/GA/DataParser/obj
 
 #Just for now, turn it back on later
 Application/LesFlorist
