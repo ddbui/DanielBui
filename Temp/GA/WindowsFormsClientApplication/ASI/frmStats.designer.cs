@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStats));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -65,7 +66,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStats));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -113,11 +113,16 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.averageDataGridView = new System.Windows.Forms.DataGridView();
             this.averageContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.processToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deselectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.goodFlightDataGridView = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.badFlightDataGridView = new System.Windows.Forms.DataGridView();
+            this.rawDataContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.loadOriginalDatatoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -146,6 +151,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.goodFlightDataGridView)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.badFlightDataGridView)).BeginInit();
+            this.rawDataContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -295,7 +301,7 @@
             this.btnDataFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDataFilter.BackColor = System.Drawing.Color.White;
             this.btnDataFilter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDataFilter.Image = global::WindowsFormsClientApplication.Properties.Resources.filter_16;
+            this.btnDataFilter.Image = ((System.Drawing.Image)(resources.GetObject("btnDataFilter.Image")));
             this.btnDataFilter.Location = new System.Drawing.Point(865, 21);
             this.btnDataFilter.Margin = new System.Windows.Forms.Padding(4);
             this.btnDataFilter.Name = "btnDataFilter";
@@ -396,7 +402,7 @@
             // 
             this.colInfo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colInfo.HeaderText = "";
-            this.colInfo.Image = global::WindowsFormsClientApplication.Properties.Resources.iinfo_16;
+            this.colInfo.Image = ((System.Drawing.Image)(resources.GetObject("colInfo.Image")));
             this.colInfo.MinimumWidth = 22;
             this.colInfo.Name = "colInfo";
             this.colInfo.ReadOnly = true;
@@ -723,7 +729,7 @@
             // 
             this.btnChkUnChk2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnChkUnChk2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnChkUnChk2.Image = global::WindowsFormsClientApplication.Properties.Resources._32check;
+            this.btnChkUnChk2.Image = ((System.Drawing.Image)(resources.GetObject("btnChkUnChk2.Image")));
             this.btnChkUnChk2.Location = new System.Drawing.Point(898, 0);
             this.btnChkUnChk2.Margin = new System.Windows.Forms.Padding(4);
             this.btnChkUnChk2.Name = "btnChkUnChk2";
@@ -807,6 +813,7 @@
             dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResults.ContextMenuStrip = this.rawDataContextMenuStrip;
             dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -847,7 +854,7 @@
             // 
             this.btnCopy.BackColor = System.Drawing.Color.White;
             this.btnCopy.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCopy.Image = global::WindowsFormsClientApplication.Properties.Resources.copy_16;
+            this.btnCopy.Image = ((System.Drawing.Image)(resources.GetObject("btnCopy.Image")));
             this.btnCopy.Location = new System.Drawing.Point(97, 2);
             this.btnCopy.Margin = new System.Windows.Forms.Padding(4);
             this.btnCopy.Name = "btnCopy";
@@ -860,7 +867,7 @@
             // 
             this.btnSave.BackColor = System.Drawing.Color.White;
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.Image = global::WindowsFormsClientApplication.Properties.Resources.floppy_disk_save_16;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.Location = new System.Drawing.Point(51, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
@@ -872,7 +879,7 @@
             // 
             this.btnOpen.BackColor = System.Drawing.Color.White;
             this.btnOpen.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOpen.Image = global::WindowsFormsClientApplication.Properties.Resources.folderopen16;
+            this.btnOpen.Image = ((System.Drawing.Image)(resources.GetObject("btnOpen.Image")));
             this.btnOpen.Location = new System.Drawing.Point(4, 2);
             this.btnOpen.Margin = new System.Windows.Forms.Padding(4);
             this.btnOpen.Name = "btnOpen";
@@ -948,16 +955,39 @@
             // 
             this.averageContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.averageContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.selectToolStripMenuItem});
+            this.processToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.selectAllToolStripMenuItem,
+            this.deselectAllToolStripMenuItem});
             this.averageContextMenuStrip.Name = "averageContextMenuStrip";
-            this.averageContextMenuStrip.Size = new System.Drawing.Size(125, 30);
+            this.averageContextMenuStrip.Size = new System.Drawing.Size(170, 88);
+            this.averageContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.averageContextMenuStrip_Opening);
             // 
-            // selectToolStripMenuItem
+            // processToolStripMenuItem
             // 
-            this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
-            this.selectToolStripMenuItem.Size = new System.Drawing.Size(124, 26);
-            this.selectToolStripMenuItem.Text = "Select";
-            this.selectToolStripMenuItem.Click += new System.EventHandler(this.selectToolStripMenuItem_Click);
+            this.processToolStripMenuItem.Name = "processToolStripMenuItem";
+            this.processToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.processToolStripMenuItem.Text = "Process";
+            this.processToolStripMenuItem.Click += new System.EventHandler(this.processToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(166, 6);
+            // 
+            // selectAllToolStripMenuItem
+            // 
+            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.selectAllToolStripMenuItem.Text = "Select All";
+            this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
+            // 
+            // deselectAllToolStripMenuItem
+            // 
+            this.deselectAllToolStripMenuItem.Name = "deselectAllToolStripMenuItem";
+            this.deselectAllToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.deselectAllToolStripMenuItem.Text = "De-select All";
+            this.deselectAllToolStripMenuItem.Click += new System.EventHandler(this.deselectAllToolStripMenuItem_Click);
             // 
             // tabPage2
             // 
@@ -1057,6 +1087,22 @@
             this.badFlightDataGridView.Size = new System.Drawing.Size(604, 209);
             this.badFlightDataGridView.TabIndex = 1;
             // 
+            // rawDataContextMenuStrip
+            // 
+            this.rawDataContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.rawDataContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadOriginalDatatoolStripMenuItem});
+            this.rawDataContextMenuStrip.Name = "averageContextMenuStrip";
+            this.rawDataContextMenuStrip.Size = new System.Drawing.Size(211, 58);
+            this.rawDataContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.rawDataContextMenuStrip_Opening);
+            // 
+            // loadOriginalDatatoolStripMenuItem
+            // 
+            this.loadOriginalDatatoolStripMenuItem.Name = "loadOriginalDatatoolStripMenuItem";
+            this.loadOriginalDatatoolStripMenuItem.Size = new System.Drawing.Size(210, 26);
+            this.loadOriginalDatatoolStripMenuItem.Text = "Load Original Data";
+            this.loadOriginalDatatoolStripMenuItem.Click += new System.EventHandler(this.loadOriginalDatatoolStripMenuItem_Click);
+            // 
             // frmStats
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1100,6 +1146,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.goodFlightDataGridView)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.badFlightDataGridView)).EndInit();
+            this.rawDataContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1157,6 +1204,11 @@
         private System.Windows.Forms.DataGridView goodFlightDataGridView;
         private System.Windows.Forms.DataGridView badFlightDataGridView;
         private System.Windows.Forms.ContextMenuStrip averageContextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem selectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem processToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deselectAllToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip rawDataContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem loadOriginalDatatoolStripMenuItem;
     }
 }

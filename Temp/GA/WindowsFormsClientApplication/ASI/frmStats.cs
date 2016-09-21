@@ -424,10 +424,6 @@ namespace WindowsFormsClientApplication
             Cursor.Current = Cursors.Default;
         }
 
-        private DataTable _rawData;
-        private DataTable _goodFlights;
-        private DataTable _badFlights;
-        private List<Item> _averageData;
         private DataParser.DataParser _parser;
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -469,6 +465,7 @@ namespace WindowsFormsClientApplication
 
         private void PopulateInputDataGridView()
         {
+            dgvResults.DataSource = null;
             dgvResults.DataSource = _parser.RawData;
         }
 
@@ -489,13 +486,77 @@ namespace WindowsFormsClientApplication
             Debug.WriteLine($"There are {_parser.AverageData.Count} items, {_parser.GoodFlights.Rows.Count - 1} are good, and {_parser.BadFlights.Rows.Count - 1} are bad.");
         }
 
-        private void selectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void processToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var count = averageDataGridView.SelectedRows.Count;
+            averageDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
 
-            if (count == 0) return;
+            var defaultColumns = new List<string>
+            {
+                // TODO: Do we always have these columns? If not, we need to find another way.
+                "FaultID", "Label", "TAIL", "Flight", "Seq#", "version", "FltHrs", "FltDate", "Count"
+            };
+            var selectedColumns   = (from item in _parser.AverageData where item.Selected select item.Channel).ToList();
 
-            MessageBox.Show($@"There are {count} item(s) selected.");
+            defaultColumns.AddRange(selectedColumns);
+
+            var selectedDataTable = _parser.GetRawDataSelectedByColumn(defaultColumns.ToArray());
+            dgvResults.DataSource = null;
+            dgvResults.DataSource = selectedDataTable;
+        }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var item in _parser.AverageData)
+            {
+                item.Selected = true;
+            }
+
+            averageDataGridView.Refresh();
+        }
+
+        private void deselectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var item in _parser.AverageData)
+            {
+                item.Selected = false;
+            }
+
+            averageDataGridView.Refresh();
+        }
+
+        private void averageContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (_parser?.AverageData == null)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            processToolStripMenuItem.Enabled = false;
+
+            averageDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+
+            foreach (var item in _parser.AverageData)
+            {
+                if (!item.Selected) continue;
+
+                processToolStripMenuItem.Enabled = true;
+                break;
+            }
+        }
+
+        private void loadOriginalDatatoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dgvResults.DataSource = null;
+            dgvResults.DataSource = _parser.RawData;
+        }
+
+        private void rawDataContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (_parser?.RawData == null)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

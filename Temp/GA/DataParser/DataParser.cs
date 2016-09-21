@@ -12,6 +12,8 @@ namespace DataParser
 
         public DataTable RawData { get; private set; }
 
+        public DataTable RawDataSelectedByColumn { get; private set; }
+
         public DataTable GoodFlights { get; private set; }
 
         public DataTable BadFlights { get; private set; }
@@ -125,6 +127,26 @@ namespace DataParser
 
             GoodFlights.Rows.Add(goodFlightAverageRow);
             BadFlights.Rows.Add(badFlightAverageRow);
+        }
+
+        public DataTable GetRawDataSelectedByColumn(string[] columns)
+        {
+            var view = new DataView(RawData);
+
+            var indexColumn = new DataColumn
+            {
+                ColumnName        = "Index",
+                DataType          = typeof(int),
+                AutoIncrement     = true,
+                AutoIncrementStep = 1,
+            };
+
+            RawDataSelectedByColumn = null;
+            RawDataSelectedByColumn = view.ToTable("selected", false, columns);
+            
+            RawDataSelectedByColumn.Columns.Add(indexColumn);
+            indexColumn.SetOrdinal(5);
+            return RawDataSelectedByColumn;
         }
     }
 }
