@@ -146,7 +146,18 @@ namespace DataParser
             
             RawDataSelectedByColumn.Columns.Add(indexColumn);
             indexColumn.SetOrdinal(5);
+
+            FillOutIndexColumn();
             return RawDataSelectedByColumn;
+        }
+
+        private void FillOutIndexColumn()
+        {
+            var index = 0;
+            foreach (DataRow row in RawDataSelectedByColumn.Rows)
+            {
+                row["Index"] = index++;
+            }
         }
     }
 }
