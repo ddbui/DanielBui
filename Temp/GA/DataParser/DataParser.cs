@@ -50,7 +50,6 @@ namespace DataParser
 
         private void SetDefaultData(DataTable dtCloned)
         {
-            // The reason why we're not using foreeach here is we need to set the cell to "0"
             for (var row = 0; row < RawData.Rows.Count; row++)
             {
                 // We cannot allow empty string so we replace them, if any, with "0"

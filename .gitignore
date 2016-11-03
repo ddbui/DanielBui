@@ -94,6 +94,8 @@ Temp/GA/GenericParsing/obj
 Temp/GA/CsvFileReader
 Temp/GA/DataParser/bin
 Temp/GA/DataParser/obj
+PrismUnityAppDemo/bin
+PrismUnityAppDemo/obj
 
 #Just for now, turn it back on later
 Application/LesFlorist
