@@ -1,0 +1,13 @@
+- So, here we have found 2 ways to add a "diff" column to our data frame. 
+1) df_result$diff <- abs((df_result$meanFault - df_result$meanNoFault) / df_result$meanNoFault) * 100
+2) df_result <- transform(df_result, diff = round(abs((df_result$meanFault - df_result$meanNoFault) / df_result$meanNoFault) * 100, 3))
+
+- apply, tapply(), sapply(), mappy(), and lapply(). WTF?
+
+- I currently use [] to filter data. Note that filter and subset (and who knows what else!) can pretty much do the same thing. But what's better, I wonder?
+These two do the same thing, I think.
+1) fault <- trainData[trainData$Label == 1, ] (I kinda like this one better, even though the line is a little longer!)
+2) fault <- filter(trainData, Label == 1) 
+
+- I currently use read_csv to import data from .CSV file. 
+Is it really better to use fread according to this link https://rawgit.com/wiki/Rdatatable/data.table/vignettes/datatable-intro.html?
