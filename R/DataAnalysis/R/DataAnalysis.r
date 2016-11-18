@@ -20,36 +20,55 @@ meanNoFault <- apply(noFault[range], 2, mean)
 sdNoFault <- apply(noFault[range], 2, sd)
 
 # Combine all the data frames (?) that we've had so far into one view
-result <- data.frame(cbind(meanNoFault, sdNoFault, meanFault, sdFault))
-str(result)
+bayes <- data.frame(cbind(meanNoFault, sdNoFault, meanFault, sdFault))
+str(bayes)
 
 # Add a "diff" column to our data frame. 
-result$diff <- abs((result$meanFault - result$meanNoFault) / result$meanNoFault) * 100
+bayes$diff <- abs((bayes$meanFault - bayes$meanNoFault) / bayes$meanNoFault) * 100
 
 # Filter to only include those with diff >= 50%
-result <- result[result$diff >= 50 & is.finite(result$diff), ]
+bayes <- bayes[bayes$diff >= 50 & is.finite(bayes$diff), ]
 
 # Sort the data frame based on diff
-result <- result[order(-result$diff),]
-colnames(result) <- c("mean (no-fault)", "sd (no fault)", "mean (fault)", "sd (fault)", "abs % diff")
-names(result) # colnames would work too!
-str(result)
-View(result)
+#bayes <- bayes[order(-bayes$diff),]
+bayes <- bayes[order(bayes$diff, decreasing = TRUE), ]
+
+colnames(bayes) <- c("mean (no-fault)", "sd (no fault)", "mean (fault)", "sd (fault)", "abs % diff")
+names(bayes) # colnames would work too!
+rownames(bayes)
+bayes["d_GCU_inhibit", ]
+str(bayes)
+View(bayes)
+
 
 # Get the displayed sensors
-sensors <- rownames(result)
+sensors <- rownames(bayes)
 length(sensors)
 str(sensors)
 
 # My very first R function
-calculateProbabilityFault <- function(x)
+loopTrainData <- function(x)
 {
-    return(x)
+    # Looks like we'll need another apply here :)
+    sapply(x[10:11], print)
+    #print(x[1:3])
 }
 
-trainData$probFault <- calculateProbabilityFault(0.78)
+#trainData$probFault <- calculateProbabilityFault(0.78)
 View(trainData)
+apply(trainData, 1, loopTrainData)
 
+loopBayes <- function(x)
+{
+  print(x)
+}
+apply(bayes, 1, loopBayes)
+
+
+#for (data in trainData){
+#  print(data)
+#}
+  
 # There doesn't seems to be a different between the following 2 statements
 # print(trainData)
 # trainData
