@@ -2,10 +2,13 @@ library(readr) # Required for reading csv
 library(dplyr) # Required for filtering the dataset
 
 # trainData is a data frame.
-trainData <- read_csv("~/Projects/GitHub/R/DataAnalysis/data/train.csv") 
+trainData <- read_csv("~/Projects/GitHub/R/DataAnalysis/data/train.csv") # How do I use stringsAsFactors with this function? 
+is.data.frame(trainData)
 
+# This is called subsetting! (Not filtering?)
 fault <- trainData[trainData$Label == 1, ]
 noFault <- trainData[trainData$Label == 0, ]
+is.data.frame(fault)
 
 # Display certains columns, e.g. from FaultId to Count and 3 additional columns
 # TODO: We can pass a string list/array to it?
@@ -20,7 +23,9 @@ meanNoFault <- apply(noFault[range], 2, mean)
 sdNoFault <- apply(noFault[range], 2, sd)
 
 # Combine all the data frames (?) that we've had so far into one view
-bayes <- data.frame(cbind(meanNoFault, sdNoFault, meanFault, sdFault))
+#It's a common mistake to do cbind here! 
+#bayes <- data.frame(cbind(meanNoFault, sdNoFault, meanFault, sdFault), stringsAsFactors = FALSE)
+bayes <- data.frame(meanNoFault, sdNoFault, meanFault, sdFault, stringsAsFactors = FALSE)
 str(bayes)
 
 # Add a "diff" column to our data frame. 
@@ -34,9 +39,14 @@ bayes <- bayes[bayes$diff >= 50 & is.finite(bayes$diff), ]
 bayes <- bayes[order(bayes$diff, decreasing = TRUE), ]
 
 colnames(bayes) <- c("mean (no-fault)", "sd (no fault)", "mean (fault)", "sd (fault)", "abs % diff")
-names(bayes) # colnames would work too!
+names(bayes) # names and colnames are actually the same thing!
+
 rownames(bayes)
 bayes["d_GCU_inhibit", ]
+bayes["d_GCU_inhibit", , drop = F]
+bayes$d_GCU_inhibit
+bayes[["d_GCU_inhibit"]]
+
 str(bayes)
 View(bayes)
 
@@ -62,8 +72,10 @@ loopBayes <- function(x)
 {
   print(x)
 }
-apply(bayes, 1, loopBayes)
+#apply(bayes, 1, loopBayes)
 
+bayes[] <- lapply(bayes[1:2], loopBayes)
+str(bayes)
 
 #for (data in trainData){
 #  print(data)

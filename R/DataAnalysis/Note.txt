@@ -1,3 +1,9 @@
+- This is something I will need: dnorm(0, mean=4, sd=10)
+
+- There are 3 subsetting operators: [, [[, and $. You need [[ when working with lists. This is because when [ is applied
+to a list it always returns a list: it never gives you the contents of the
+list. To get the contents, you need [[.
+
 - So, here we have found 2 ways to add a "diff" column to our data frame. 
 1) df_result$diff <- abs((df_result$meanFault - df_result$meanNoFault) / df_result$meanNoFault) * 100
 2) df_result <- transform(df_result, diff = round(abs((df_result$meanFault - df_result$meanNoFault) / df_result$meanNoFault) * 100, 3))
