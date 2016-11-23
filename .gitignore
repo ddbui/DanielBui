@@ -99,6 +99,10 @@ Temp/GA/NMathDemo/obj
 PrismUnityAppDemo/bin
 PrismUnityAppDemo/obj
 R/DataAnalysis/.Rproj.user
+CapacitorWebApplication/src/CapacitorWebApplication/bin
+CapacitorWebApplication/src/CapacitorWebApplication/obj
+Capacitor/CapacitorWebApplication/bin
+Capacitor/CapacitorWebApplication/obj
 
 #Just for now, turn it back on later
 Application/LesFlorist
