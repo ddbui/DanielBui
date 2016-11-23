@@ -46,9 +46,12 @@ namespace CapacitorWebApplication
             // the wwwroot  folder.
             app.UseStaticFiles();
 
-            // This extension method enables ASP.NET Core MVC with a default
-            // configuration (which we will change later in the development process).
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Resin}/{action=List}/{id?}");
+            });
         }
     }
 }
