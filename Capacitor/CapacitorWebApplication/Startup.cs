@@ -27,6 +27,7 @@ namespace CapacitorWebApplication
 
             services.AddTransient<IResinRepository, EFResinRepository>();
             services.AddTransient<IMaterialRepository, EFMaterialRepository>();
+            services.AddTransient<IFilmTypeRepository, EFFilmTypeRepository>();
 
             services.AddMvc();
         }
@@ -51,7 +52,7 @@ namespace CapacitorWebApplication
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Material}/{action=List}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
 
             SeedData.EnsurePopulated(app);

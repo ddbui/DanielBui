@@ -32,6 +32,15 @@ namespace CapacitorWebApplication.Models
                 );
                 context.SaveChanges();
             }
+
+            if (!context.FilmTypes.Any())
+            {
+                context.FilmTypes.AddRange(
+                    new FilmType { Name = "Resin" },
+                    new FilmType { Name = "Coextruded" }
+                );
+                context.SaveChanges();
+            }
         }
     }
 }
