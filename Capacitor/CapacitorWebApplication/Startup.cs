@@ -24,7 +24,9 @@ namespace CapacitorWebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:Capacitor:ConnectionString"]));
+
             services.AddTransient<IResinRepository, EFResinRepository>();
+            services.AddTransient<IMaterialRepository, EFMaterialRepository>();
 
             services.AddMvc();
         }
@@ -49,7 +51,7 @@ namespace CapacitorWebApplication
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Resin}/{action=List}/{id?}");
+                    template: "{controller=Material}/{action=List}/{id?}");
             });
 
             SeedData.EnsurePopulated(app);
