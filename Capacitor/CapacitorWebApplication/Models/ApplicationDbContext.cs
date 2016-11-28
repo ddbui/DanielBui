@@ -7,5 +7,7 @@ namespace CapacitorWebApplication.Models
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
           : base(options) { }
         public DbSet<Resin> Resins { get; set; }
+
+        public DbSet<Material> Materials { get; set; }
     }
 }

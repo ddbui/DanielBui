@@ -110,3 +110,4 @@ LesFlorist.Tests
 *.suo
 *.db
 .vs
+Capacitor/CapacitorWebApplication/project.lock.json
