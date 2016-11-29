@@ -8,9 +8,10 @@ using CapacitorWebApplication.Models;
 namespace CapacitorWebApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161129215200_TakeOutFilmType")]
+    partial class TakeOutFilmType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -22,8 +23,6 @@ namespace CapacitorWebApplication.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<double>("FilmThickness");
-
-                    b.Property<int>("FilmType");
 
                     b.Property<double>("HoldTime");
 

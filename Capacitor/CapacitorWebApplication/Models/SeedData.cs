@@ -55,7 +55,7 @@ namespace CapacitorWebApplication.Models
                 context.Films.AddRange(
                     new Film
                     {
-                        FilmType             = new FilmType { Name = "Resin" },
+                        FilmType             = 1,
                         StampCapSerialNumber = "KF-850 #1",
                         FilmThickness        = 13.15,
                         HoldTime             = 30,
@@ -66,14 +66,14 @@ namespace CapacitorWebApplication.Models
                     },
                     new Film
                     {
-                        FilmType             = new FilmType { Name = "Resin" },
+                        FilmType             = 2,
                         StampCapSerialNumber = "KF-850 #2",
                         FilmThickness        = 11.67,
                         HoldTime             = 30,
                         StepsToZeroCap       = 24,
                         VatZeroCap           = 6900,
-                        FilmMaterials = { material1, material2 },
-                        FilmResins = { resin3, resin4 }
+                        FilmMaterials        = { material1, material2 },
+                        FilmResins           = { resin3, resin4 }
                     }
                 );
             }

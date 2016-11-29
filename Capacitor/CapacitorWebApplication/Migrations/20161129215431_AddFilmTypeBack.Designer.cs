@@ -8,9 +8,10 @@ using CapacitorWebApplication.Models;
 namespace CapacitorWebApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161129215431_AddFilmTypeBack")]
+    partial class AddFilmTypeBack
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -23,7 +24,7 @@ namespace CapacitorWebApplication.Migrations
 
                     b.Property<double>("FilmThickness");
 
-                    b.Property<int>("FilmType");
+                    b.Property<int?>("FilmTypeId");
 
                     b.Property<double>("HoldTime");
 
@@ -34,6 +35,8 @@ namespace CapacitorWebApplication.Migrations
                     b.Property<int>("VatZeroCap");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FilmTypeId");
 
                     b.ToTable("Films");
                 });
@@ -98,6 +101,13 @@ namespace CapacitorWebApplication.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Resins");
+                });
+
+            modelBuilder.Entity("CapacitorWebApplication.Models.Film", b =>
+                {
+                    b.HasOne("CapacitorWebApplication.Models.FilmType", "FilmType")
+                        .WithMany()
+                        .HasForeignKey("FilmTypeId");
                 });
 
             modelBuilder.Entity("CapacitorWebApplication.Models.FilmMaterial", b =>

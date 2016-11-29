@@ -6,7 +6,7 @@ namespace CapacitorWebApplication.Models
     {
         public int Id { get; set; }
 
-        public virtual FilmType FilmType { get; set; } // one-to-one relationship
+        public int FilmType { get; set; }
 
         public string StampCapSerialNumber { get; set; }
 
