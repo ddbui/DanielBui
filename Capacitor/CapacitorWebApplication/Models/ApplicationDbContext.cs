@@ -16,7 +16,17 @@ namespace CapacitorWebApplication.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // TODO: Add fluent API code here!
+            modelBuilder.Entity<FilmResin>().HasKey(t => new { t.FilmId, t.ResinId });
+
+            modelBuilder.Entity<FilmResin>()
+                .HasOne(pt => pt.Film)
+                .WithMany(p => p.FilmResins)
+                .HasForeignKey(pt => pt.FilmId);
+
+            modelBuilder.Entity<FilmResin>()
+                .HasOne(pt => pt.Resin)
+                .WithMany(t => t.FilmResins)
+                .HasForeignKey(pt => pt.ResinId);
         }
     }
 }

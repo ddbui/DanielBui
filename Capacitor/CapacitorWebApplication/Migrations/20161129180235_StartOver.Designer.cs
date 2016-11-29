@@ -8,9 +8,10 @@ using CapacitorWebApplication.Models;
 namespace CapacitorWebApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161129180235_StartOver")]
+    partial class StartOver
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -38,19 +39,6 @@ namespace CapacitorWebApplication.Migrations
                     b.HasIndex("FilmTypeId");
 
                     b.ToTable("Films");
-                });
-
-            modelBuilder.Entity("CapacitorWebApplication.Models.FilmResin", b =>
-                {
-                    b.Property<int>("FilmId");
-
-                    b.Property<int>("ResinId");
-
-                    b.HasKey("FilmId", "ResinId");
-
-                    b.HasIndex("ResinId");
-
-                    b.ToTable("FilmResin");
                 });
 
             modelBuilder.Entity("CapacitorWebApplication.Models.FilmType", b =>
@@ -94,19 +82,6 @@ namespace CapacitorWebApplication.Migrations
                     b.HasOne("CapacitorWebApplication.Models.FilmType", "FilmType")
                         .WithMany()
                         .HasForeignKey("FilmTypeId");
-                });
-
-            modelBuilder.Entity("CapacitorWebApplication.Models.FilmResin", b =>
-                {
-                    b.HasOne("CapacitorWebApplication.Models.Film", "Film")
-                        .WithMany("FilmResins")
-                        .HasForeignKey("FilmId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CapacitorWebApplication.Models.Resin", "Resin")
-                        .WithMany("FilmResins")
-                        .HasForeignKey("ResinId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

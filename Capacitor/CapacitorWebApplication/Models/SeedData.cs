@@ -42,11 +42,10 @@ namespace CapacitorWebApplication.Models
 
             if (!context.Films.Any())
             {
-                var resin1 = new Resin { Name = "KF-850" };
-                var resin2 = new Resin { Name = "Kynar 720" };
-
-                var material1 = new Material { Name = "PVDF" };
-                var material2 = new Material { Name = "PC" };
+                var resin1 = new FilmResin { ResinId = 1 };
+                var resin2 = new FilmResin { ResinId = 2 };
+                var resin3 = new FilmResin { ResinId = 3 };
+                var resin4 = new FilmResin { ResinId = 4 };
 
                 context.Films.AddRange(
                     new Film
@@ -57,8 +56,8 @@ namespace CapacitorWebApplication.Models
                         HoldTime             = 30,
                         StepsToZeroCap       = 26,
                         VatZeroCap           = 7500,
-                        Materials            = {material1, material2},
-                        Resins               = {resin1, resin2}
+                        //Materials            = {material1, material2},
+                        FilmResins           = {resin1, resin2}
                     },
                     new Film
                     {
@@ -68,8 +67,8 @@ namespace CapacitorWebApplication.Models
                         HoldTime             = 30,
                         StepsToZeroCap       = 24,
                         VatZeroCap           = 6900,
-                        Materials            = { material1, material2 },
-                        Resins               = { resin1, resin2 }
+                        //Materials            = { material1, material2 },
+                        FilmResins = { resin3, resin4 }
                     }
                 );
             }
