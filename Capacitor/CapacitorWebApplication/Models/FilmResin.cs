@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CapacitorWebApplication.Models
+﻿namespace CapacitorWebApplication.Models
 {
+    /// <summary>
+    /// Joint table for Film and Resin many-to-many relationship
+    /// </summary>
     public class FilmResin
     {
         public int FilmId { get; set; }

@@ -47,6 +47,11 @@ namespace CapacitorWebApplication.Models
                 var resin3 = new FilmResin { ResinId = 3 };
                 var resin4 = new FilmResin { ResinId = 4 };
 
+                var material1 = new FilmMaterial { MaterialId = 1 };
+                var material2 = new FilmMaterial { MaterialId = 2 };
+                var material3 = new FilmMaterial { MaterialId = 3 };
+                var material4 = new FilmMaterial { MaterialId = 4 };
+
                 context.Films.AddRange(
                     new Film
                     {
@@ -56,7 +61,7 @@ namespace CapacitorWebApplication.Models
                         HoldTime             = 30,
                         StepsToZeroCap       = 26,
                         VatZeroCap           = 7500,
-                        //Materials            = {material1, material2},
+                        FilmMaterials        = {material3, material4},
                         FilmResins           = {resin1, resin2}
                     },
                     new Film
@@ -67,7 +72,7 @@ namespace CapacitorWebApplication.Models
                         HoldTime             = 30,
                         StepsToZeroCap       = 24,
                         VatZeroCap           = 6900,
-                        //Materials            = { material1, material2 },
+                        FilmMaterials = { material1, material2 },
                         FilmResins = { resin3, resin4 }
                     }
                 );

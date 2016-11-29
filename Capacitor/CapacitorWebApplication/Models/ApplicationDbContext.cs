@@ -16,6 +16,7 @@ namespace CapacitorWebApplication.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // FilmResin many-to-many joint table
             modelBuilder.Entity<FilmResin>().HasKey(t => new { t.FilmId, t.ResinId });
 
             modelBuilder.Entity<FilmResin>()
@@ -27,6 +28,19 @@ namespace CapacitorWebApplication.Models
                 .HasOne(pt => pt.Resin)
                 .WithMany(t => t.FilmResins)
                 .HasForeignKey(pt => pt.ResinId);
+
+            // FilmMaterial many-to-many joint table
+            modelBuilder.Entity<FilmMaterial>().HasKey(t => new { t.FilmId, t.MaterialId });
+
+            modelBuilder.Entity<FilmMaterial>()
+                .HasOne(pt => pt.Film)
+                .WithMany(p => p.FilmMaterials)
+                .HasForeignKey(pt => pt.FilmId);
+
+            modelBuilder.Entity<FilmMaterial>()
+                .HasOne(pt => pt.Material)
+                .WithMany(t => t.FilmMaterials)
+                .HasForeignKey(pt => pt.MaterialId);
         }
     }
 }

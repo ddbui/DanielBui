@@ -13,7 +13,7 @@ namespace CapacitorWebApplication.Models
         //? I wonder what the database will look like?
         public virtual ICollection<FilmResin> FilmResins { get; set; } // many-to-many relationship
 
-        //public virtual ICollection<Material> Materials { get; set; } // many-to-many relationship
+        public virtual ICollection<FilmMaterial> FilmMaterials { get; set; } // many-to-many relationship
 
         public double FilmThickness { get; set; }
 
@@ -26,7 +26,7 @@ namespace CapacitorWebApplication.Models
         public Film()
         {
             FilmResins    = new HashSet<FilmResin>();
-            //Materials = new HashSet<Material>();
+            FilmMaterials = new HashSet<FilmMaterial>();
         }
 
     }

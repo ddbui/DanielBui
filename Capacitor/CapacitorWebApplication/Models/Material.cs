@@ -7,11 +7,11 @@ namespace CapacitorWebApplication.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        //public virtual ICollection<Film> Films { get; set; }
+        public virtual ICollection<FilmMaterial> FilmMaterials { get; set; } // many-to-many relationship
 
         public Material()
         {
-            //Films = new HashSet<Film>();
+            FilmMaterials = new HashSet<FilmMaterial>();
         }
     }
 }
