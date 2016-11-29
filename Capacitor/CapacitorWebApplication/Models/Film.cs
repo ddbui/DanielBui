@@ -11,9 +11,9 @@ namespace CapacitorWebApplication.Models
         public string StampCapSerialNumber { get; set; }
 
         //? I wonder what the database will look like?
-        public virtual ICollection<Resin> Resins { get; set; } // one-to-many relationship
+        public virtual ICollection<FilmResin> FilmResins { get; set; } // many-to-many relationship
 
-        public virtual ICollection<Material> Materials { get; set; } // one-to-many relationship
+        //public virtual ICollection<Material> Materials { get; set; } // many-to-many relationship
 
         public double FilmThickness { get; set; }
 
@@ -25,8 +25,8 @@ namespace CapacitorWebApplication.Models
 
         public Film()
         {
-            Resins    = new HashSet<Resin>();
-            Materials = new HashSet<Material>();
+            FilmResins    = new HashSet<FilmResin>();
+            //Materials = new HashSet<Material>();
         }
 
     }
