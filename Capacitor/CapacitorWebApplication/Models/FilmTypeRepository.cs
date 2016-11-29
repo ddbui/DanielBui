@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace CapacitorWebApplication.Models
 {
-    public class EFFilmTypeRepository : IFilmTypeRepository
+    public class FilmTypeRepository : IFilmTypeRepository
     {
         private ApplicationDbContext context;
-        public EFFilmTypeRepository(ApplicationDbContext ctx)
+        public FilmTypeRepository(ApplicationDbContext ctx)
         {
             context = ctx;
         }

@@ -12,6 +12,8 @@ namespace CapacitorWebApplication.Models
 
         public DbSet<FilmType> FilmTypes { get; set; }
 
+        public DbSet<Film> Films { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // TODO: Add fluent API code here!

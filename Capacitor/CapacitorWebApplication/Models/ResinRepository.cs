@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace CapacitorWebApplication.Models
 {
-    public class EFMaterialRepository : IMaterialRepository
+    public class ResinRepository : IResinRepository
     {
         private ApplicationDbContext context;
-        public EFMaterialRepository(ApplicationDbContext ctx)
+        public ResinRepository(ApplicationDbContext ctx)
         {
             context = ctx;
         }
-        public IEnumerable<Material> Materials => context.Materials;
+        public IEnumerable<Resin> Resins => context.Resins;
     }
 }

@@ -25,9 +25,9 @@ namespace CapacitorWebApplication
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:Capacitor:ConnectionString"]));
 
-            services.AddTransient<IResinRepository, EFResinRepository>();
-            services.AddTransient<IMaterialRepository, EFMaterialRepository>();
-            services.AddTransient<IFilmTypeRepository, EFFilmTypeRepository>();
+            services.AddTransient<IResinRepository, ResinRepository>();
+            services.AddTransient<IMaterialRepository, MaterialRepository>();
+            services.AddTransient<IFilmTypeRepository, FilmTypeRepository>();
 
             services.AddMvc();
         }
