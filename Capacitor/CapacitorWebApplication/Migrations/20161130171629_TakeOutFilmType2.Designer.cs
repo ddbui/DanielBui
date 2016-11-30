@@ -8,9 +8,10 @@ using CapacitorWebApplication.Models;
 namespace CapacitorWebApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161130171629_TakeOutFilmType2")]
+    partial class TakeOutFilmType2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -23,8 +24,6 @@ namespace CapacitorWebApplication.Migrations
 
                     b.Property<double>("FilmThickness");
 
-                    b.Property<int?>("FilmType");
-
                     b.Property<double>("HoldTime");
 
                     b.Property<string>("StampCapSerialNumber");
@@ -34,8 +33,6 @@ namespace CapacitorWebApplication.Migrations
                     b.Property<int>("VatZeroCap");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FilmType");
 
                     b.ToTable("Films");
                 });
@@ -66,6 +63,18 @@ namespace CapacitorWebApplication.Migrations
                     b.ToTable("FilmResin");
                 });
 
+            modelBuilder.Entity("CapacitorWebApplication.Models.FilmType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FilmTypes");
+                });
+
             modelBuilder.Entity("CapacitorWebApplication.Models.Material", b =>
                 {
                     b.Property<int>("Id")
@@ -88,25 +97,6 @@ namespace CapacitorWebApplication.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Resins");
-                });
-
-            modelBuilder.Entity("CapacitorWebApplication.Models.Type", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Types");
-                });
-
-            modelBuilder.Entity("CapacitorWebApplication.Models.Film", b =>
-                {
-                    b.HasOne("CapacitorWebApplication.Models.Type", "Type")
-                        .WithMany()
-                        .HasForeignKey("FilmType");
                 });
 
             modelBuilder.Entity("CapacitorWebApplication.Models.FilmMaterial", b =>

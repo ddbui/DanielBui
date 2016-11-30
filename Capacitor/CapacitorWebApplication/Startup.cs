@@ -27,7 +27,6 @@ namespace CapacitorWebApplication
 
             services.AddTransient<IResinRepository, ResinRepository>();
             services.AddTransient<IMaterialRepository, MaterialRepository>();
-            services.AddTransient<IFilmTypeRepository, FilmTypeRepository>();
 
             services.AddMvc();
         }

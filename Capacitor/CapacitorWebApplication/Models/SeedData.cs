@@ -31,14 +31,16 @@ namespace CapacitorWebApplication.Models
                 );
             }
 
-            if (!context.FilmTypes.Any())
+            if (!context.Types.Any())
             {
-                context.FilmTypes.AddRange(
-                    new FilmType { Name = "Resin" },
-                    new FilmType { Name = "Coextruded" }
+                context.Types.AddRange(
+                    new Type { Name = "Resin" },
+                    new Type { Name = "Coextruded" }
                 );
-                
             }
+
+            var type1 = context.Types.Where(s => s.Id == 1).First();
+            var type2 = context.Types.Where(s => s.Id == 2).First();
 
             if (!context.Films.Any())
             {
@@ -55,7 +57,7 @@ namespace CapacitorWebApplication.Models
                 context.Films.AddRange(
                     new Film
                     {
-                        FilmType             = 1,
+                        Type                 = type1,
                         StampCapSerialNumber = "KF-850 #1",
                         FilmThickness        = 13.15,
                         HoldTime             = 30,
@@ -66,7 +68,7 @@ namespace CapacitorWebApplication.Models
                     },
                     new Film
                     {
-                        FilmType             = 2,
+                        Type                 = type2,
                         StampCapSerialNumber = "KF-850 #2",
                         FilmThickness        = 11.67,
                         HoldTime             = 30,

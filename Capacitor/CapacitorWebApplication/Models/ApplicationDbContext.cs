@@ -10,9 +10,9 @@ namespace CapacitorWebApplication.Models
 
         public DbSet<Material> Materials { get; set; }
 
-        public DbSet<FilmType> FilmTypes { get; set; }
-
         public DbSet<Film> Films { get; set; }
+
+        public DbSet<Type> Types { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

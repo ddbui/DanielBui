@@ -8,7 +8,9 @@ namespace CapacitorWebApplication.Models
         public int Id { get; set; }
 
         [ForeignKey("FilmType")]
-        public int FilmType { get; set; }
+        //public int FilmType { get; set; }
+
+        public virtual Type Type { get; set; }
 
         public string StampCapSerialNumber { get; set; }
 
