@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CapacitorWebApplication.Models
 {
@@ -6,6 +7,7 @@ namespace CapacitorWebApplication.Models
     {
         public int Id { get; set; }
 
+        [ForeignKey("FilmType")]
         public int FilmType { get; set; }
 
         public string StampCapSerialNumber { get; set; }
