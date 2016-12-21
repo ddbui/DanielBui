@@ -1,4 +1,0 @@
-﻿The three commands that I've used so far
-Add-Migration [name]
-Update-Database
-Remove-Migration [Note: it won't work if we already applied it to the database]
