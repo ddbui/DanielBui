@@ -1,3 +1,0 @@
-Books
-
-Pro .NET 4 Parallel Programming in C#. Apress. 2010
